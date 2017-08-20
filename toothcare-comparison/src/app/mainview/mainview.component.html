@@ -1,0 +1,29 @@
+<div class="inputs">
+	<h2>Providers:</h2>
+	<insurance-provider *ngFor="let provider of providers; let i=index;" [(provider)]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
+	<span *ngIf="providers.length === 0">No providers selected</span>
+	<a (click)="addProvider()" href="#">add provider</a>
+
+	<h2>Missing tooth price:</h2>
+	<input type="number" [(ngModel)]="missing_tooth_price">
+</div>
+<div class="results">
+	<h2>Results *:</h2> <a href="#" (click)="calculate()">(re-)calculate</a>
+<!-- 	<span *ngFor="let result of results">
+		{{result.name}}
+		<ul>
+			<li *ngFor="let overpaid of result.results; let teeth_missing = index">Teeth missing: {{teeth_missing}}, overpaid: {{overpaid | currency: 'EUR' : true}}</li>
+		</ul>
+	</span> -->
+	* positive overpaids are bad
+
+<canvas class="diagram" *ngIf="lineChartData.length > 0" baseChart width="400" height="400"
+	[datasets]="lineChartData"
+	[labels]="lineChartLabels"
+	[options]="lineChartOptions"
+	[colors]="lineChartColors"
+	[legend]="lineChartLegend"
+	[chartType]="lineChartType"
+	(chartHover)="chartHovered($event)"
+	(chartClick)="chartClicked($event)"></canvas>
+</div>

@@ -1,0 +1,12 @@
+.inputs{
+	width: 50%;
+	float: left
+}
+.results{
+	width: 50%;
+	float: right;
+}
+.diagram{
+	clear: both;
+	float: left;
+}
