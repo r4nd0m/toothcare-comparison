@@ -11,3 +11,5 @@ Compare tooth care insurance proposals
 3. npm install
 4. ng serve
 
+# Try online
+https://r4nd0m.github.io/toothcare-comparison
