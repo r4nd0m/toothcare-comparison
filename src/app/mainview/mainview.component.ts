@@ -69,35 +69,35 @@ export class MainviewComponent implements OnInit {
 		this.providers.splice(index, 1);
 	}
 
-	calculate(){
-		this.lineChartColors.splice(0, this.lineChartData.length);
-		this.lineChartData = [];
-		this.lineChartLabels.splice(0, this.lineChartLabels.length);
+calculate(){
+	this.lineChartColors.splice(0, this.lineChartColors.length);
+	this.lineChartData = [];
+	this.lineChartLabels.splice(0, this.lineChartLabels.length);
 
+	for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
+		this.lineChartLabels.push(teeth_count);
+	}
+
+	this.providers.forEach((provider) => {
+		let result = {label: provider.name, data: []};
 		for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
-			this.lineChartLabels.push(teeth_count);
+			result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
 		}
 
-		this.providers.forEach((provider) => {
-			let result = {label: provider.name, data: []};
-			for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
-				result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
-			}
+		this.lineChartData.push(result);
 
-			this.lineChartData.push(result);
+		let random_color_rgb = this.getRandomColor();
 
-			let random_color_rgb = this.getRandomColor();
-
-			this.lineChartColors.push({
-				backgroundColor: 'rgba(' + random_color_rgb + ',0.1)',
-				borderColor: 'rgba(' + random_color_rgb + ',1)',
-				pointBackgroundColor: 'rgba(148,159,177,1)',
-				pointBorderColor: '#fff',
-				pointHoverBackgroundColor: '#fff',
-				pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-			});
-		})
-  	}
+		this.lineChartColors.push({
+			backgroundColor: 'rgba(' + random_color_rgb + ',0.1)',
+			borderColor: 'rgba(' + random_color_rgb + ',1)',
+			pointBackgroundColor: 'rgba(148,159,177,1)',
+			pointBorderColor: '#fff',
+			pointHoverBackgroundColor: '#fff',
+			pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+		});
+	})
+	}
 
 	calculateForProvider(provider: InsuranceProvider, missing_teeth: number){
 		let total_years = provider.prices.reduce(
