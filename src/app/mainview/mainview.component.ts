@@ -54,6 +54,26 @@ export class MainviewComponent implements OnInit {
 					//new InsurancePrice(new InsurancePeriod(60, 100), 32.62)
 				],
 				50
+			),
+			new InsuranceProvider(
+				"Württembergische",
+				[
+					new InsurancePrice(new InsurancePeriod(37, 39), 34.37),
+					new InsurancePrice(new InsurancePeriod(40, 49), 41.67),
+					new InsurancePrice(new InsurancePeriod(50, 59), 47.63),
+					//new InsurancePrice(new InsurancePeriod(60, 100), 53.96)
+				],
+				90
+			),
+			new InsuranceProvider(
+				"Die Bayerische",
+				[
+					new InsurancePrice(new InsurancePeriod(37, 39), 32.6),
+					new InsurancePrice(new InsurancePeriod(40, 49), 41.4),
+					new InsurancePrice(new InsurancePeriod(50, 59), 54.4),
+					//new InsurancePrice(new InsurancePeriod(60, 100), 66.2)
+				],
+				100
 			)
 		)
 	}
@@ -126,11 +146,11 @@ export class MainviewComponent implements OnInit {
 		return {
 			name: provider.name,
 			total_years: total_years,
-			total_coverage_price: total_coverage_price,
-			total_treatment_price: total_treatment_price,
-			self_paid: self_paid,
-			total_paid: total_paid,
-			overpaid: total_paid - total_treatment_price
+			total_coverage_price: total_coverage_price.toFixed(2),
+			total_treatment_price: total_treatment_price.toFixed(2),
+			self_paid: self_paid.toFixed(2),
+			total_paid: total_paid.toFixed(2),
+			overpaid: (total_paid - total_treatment_price).toFixed(2)
 		};
 	}
 
