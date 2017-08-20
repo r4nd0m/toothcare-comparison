@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { InsuranceProvider, InsurancePeriod, InsurancePrice } from '../model';
 
 @Component({
-  selector: 'mainview',
-  templateUrl: './mainview.component.html',
-  styleUrls: ['./mainview.component.css']
+	selector: 'mainview',
+	templateUrl: './mainview.component.html',
+	styleUrls: ['./mainview.component.css']
 })
 export class MainviewComponent implements OnInit {
 	providers: Array<InsuranceProvider> = [];
@@ -13,15 +13,15 @@ export class MainviewComponent implements OnInit {
 	missing_teeth_max = 15;
 
 	lineChartData: Array<any> = [];
-	lineChartLabels:Array<any> = [];
+	lineChartLabels: Array<any> = [];
 
-	lineChartOptions:any = {
+	lineChartOptions: any = {
 		responsive: true
 	};
 
-	lineChartColors:Array<any> = [];
-	lineChartLegend:boolean = true;
-	lineChartType:string = 'line';
+	lineChartColors: Array<any> = [];
+	lineChartLegend: boolean = true;
+	lineChartType: string = 'line';
 
 	constructor() {
 		this.providers.push(
@@ -61,26 +61,26 @@ export class MainviewComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	addProvider(){
+	addProvider() {
 		this.providers.push(new InsuranceProvider());
 	}
 
-	removeProvider(index: number){
+	removeProvider(index: number) {
 		this.providers.splice(index, 1);
 	}
 
-	calculate(){
+	calculate() {
 		this.lineChartColors.splice(0, this.lineChartColors.length);
 		this.lineChartData = [];
 		this.lineChartLabels.splice(0, this.lineChartLabels.length);
 
-		for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
+		for (let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++) {
 			this.lineChartLabels.push(teeth_count);
 		}
 
 		this.providers.forEach((provider) => {
-			let result = {label: provider.name, data: []};
-			for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
+			let result = { label: provider.name, data: [] };
+			for (let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++) {
 				result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
 			}
 
@@ -101,7 +101,7 @@ export class MainviewComponent implements OnInit {
 		this.lineChartData.slice();
 	}
 
-	calculateForProvider(provider: InsuranceProvider, missing_teeth: number){
+	calculateForProvider(provider: InsuranceProvider, missing_teeth: number) {
 		let total_years = provider.prices.reduce(
 			(acc, price) => {
 				let total_years = 1 + price.period.end - price.period.start;
@@ -134,11 +134,11 @@ export class MainviewComponent implements OnInit {
 		};
 	}
 
-	private getRandomColor():string {
+	private getRandomColor(): string {
 		return [
-			Math.floor(Math.random()*255), 
-			Math.floor(Math.random()*228), 
-			Math.floor(Math.random()*228)
+			Math.floor(Math.random() * 255),
+			Math.floor(Math.random() * 228),
+			Math.floor(Math.random() * 228)
 		].join(',');
 	}
 

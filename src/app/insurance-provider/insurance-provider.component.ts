@@ -16,11 +16,11 @@ export class InsuranceProviderComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	addPrice(){
+	addPrice() {
 		this.provider.addPrice();
 	}
 
-	removeProvider(){
+	removeProvider() {
 		this.removeEmitter.emit(null);
 	}
 
