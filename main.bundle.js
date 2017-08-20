@@ -231,7 +231,7 @@ var MainviewComponent = (function () {
     };
     MainviewComponent.prototype.calculate = function () {
         var _this = this;
-        this.lineChartColors.splice(0, this.lineChartData.length);
+        this.lineChartColors.splice(0, this.lineChartColors.length);
         this.lineChartData = [];
         this.lineChartLabels.splice(0, this.lineChartLabels.length);
         for (var teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++) {
@@ -253,6 +253,7 @@ var MainviewComponent = (function () {
                 pointHoverBorderColor: 'rgba(148,159,177,0.8)'
             });
         });
+        this.lineChartData.slice();
     };
     MainviewComponent.prototype.calculateForProvider = function (provider, missing_teeth) {
         var total_years = provider.prices.reduce(function (acc, price) {
@@ -636,7 +637,7 @@ module.exports = "<p>\r\n\tName: <input name=\"provider_name\" [(ngModel)]=\"pro
 /***/ 310:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"inputs\">\r\n\t<h2>Providers:</h2>\r\n\t<insurance-provider *ngFor=\"let provider of providers; let i=index;\" [(provider)]=\"providers[i]\" (onRemove)=\"removeProvider(i)\"></insurance-provider>\r\n\t<span *ngIf=\"providers.length === 0\">No providers selected</span>\r\n\t<a (click)=\"addProvider()\" href=\"#\">add provider</a>\r\n\r\n\t<h2>Missing tooth price:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_tooth_price\">\r\n\r\n\t<h2>Calculate for missing teeth between:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_min\">\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_max\">\r\n</div>\r\n<div class=\"results\">\r\n\t<h2>Results *:</h2> <a href=\"#\" (click)=\"calculate()\">(re-)calculate</a>\r\n\t* positive overpaids are bad\r\n\r\n<canvas class=\"diagram\" *ngIf=\"lineChartData.length > 0\" baseChart width=\"400\" height=\"400\"\r\n\t[datasets]=\"lineChartData\"\r\n\t[labels]=\"lineChartLabels\"\r\n\t[options]=\"lineChartOptions\"\r\n\t[colors]=\"lineChartColors\"\r\n\t[legend]=\"lineChartLegend\"\r\n\t[chartType]=\"lineChartType\"\r\n\t(chartHover)=\"chartHovered($event)\"\r\n\t(chartClick)=\"chartClicked($event)\"></canvas>\r\n</div>"
+module.exports = "<div class=\"inputs\">\r\n\t<h2>Providers:</h2>\r\n\t<insurance-provider *ngFor=\"let provider of providers; let i=index;\" [(provider)]=\"providers[i]\" (onRemove)=\"removeProvider(i)\"></insurance-provider>\r\n\t<span *ngIf=\"providers.length === 0\">No providers selected</span>\r\n\t<a href=\"javascript:void(0)\" (click)=\"addProvider()\">add provider</a>\r\n\r\n\t<h2>Missing tooth price:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_tooth_price\">\r\n\r\n\t<h2>Calculate for missing teeth between:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_min\">\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_max\">\r\n</div>\r\n<div class=\"results\">\r\n\t<h2>Results *:</h2> <a *ngIf=\"lineChartData.length === 0\" href=\"javascript:void(0)\" (click)=\"calculate()\">calculate</a> <a *ngIf=\"lineChartData.length > 0\" href=\"javascript:void(0)\" (click)=\"lineChartData = []\">reset</a>\r\n\t* positive overpaids are bad\r\n\r\n<canvas class=\"diagram\" *ngIf=\"lineChartData.length > 0\" baseChart width=\"400\" height=\"400\"\r\n\t[datasets]=\"lineChartData\"\r\n\t[labels]=\"lineChartLabels\"\r\n\t[options]=\"lineChartOptions\"\r\n\t[colors]=\"lineChartColors\"\r\n\t[legend]=\"lineChartLegend\"\r\n\t[chartType]=\"lineChartType\"\r\n\t(chartHover)=\"chartHovered($event)\"\r\n\t(chartClick)=\"chartClicked($event)\"></canvas>\r\n</div>"
 
 /***/ }),
 
