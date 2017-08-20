@@ -9,43 +9,11 @@ import { InsuranceProvider, InsurancePeriod, InsurancePrice } from '../model';
 export class MainviewComponent implements OnInit {
 	providers: Array<InsuranceProvider> = [];
 	missing_tooth_price: number = 1500;
+	missing_teeth_min = 2;
+	missing_teeth_max = 15;
 
-	results: Array<any> = [];
 	lineChartData: Array<any> = [];
-	lineChartLabels:Array<any> = [
-		0,
-		1,
-		2,
-		3,
-		4,
-		5,
-		6,
-		7,
-		8,
-		9,
-		10,
-		11,
-		12,
-		13,
-		14,
-		15,
-		16,
-		17,
-		18,
-		19,
-		20,
-		21,
-		22,
-		23,
-		24,
-		25,
-		26,
-		27,
-		28,
-		29,
-		30,
-		31
-	];
+	lineChartLabels:Array<any> = [];
 
 	lineChartOptions:any = {
 		responsive: true
@@ -102,14 +70,21 @@ export class MainviewComponent implements OnInit {
 	}
 
 	calculate(){
-		this.results = [];
+		this.lineChartColors.splice(0, this.lineChartData.length);
+		this.lineChartData = [];
+		this.lineChartLabels.splice(0, this.lineChartLabels.length);
+
+		for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
+			this.lineChartLabels.push(teeth_count);
+		}
+
 		this.providers.forEach((provider) => {
-			let result = {name: provider.name, results: []};
-			for(let teeth_count=0; teeth_count <= 32; teeth_count++){
-				result.results.push(this.calculateForProvider(provider, teeth_count).overpaid);
+			let result = {label: provider.name, data: []};
+			for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
+				result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
 			}
 
-			this.results.push(result);
+			this.lineChartData.push(result);
 
 			let random_color_rgb = this.getRandomColor();
 
@@ -122,18 +97,7 @@ export class MainviewComponent implements OnInit {
 				pointHoverBorderColor: 'rgba(148,159,177,0.8)'
 			});
 		})
-
-		this.lineChartData = [];
-		this.results.forEach((item) => {
-			this.lineChartData.push({
-				data: item.results,
-				label: item.name
-			})
-		})
-
-  
-
-	}
+  	}
 
 	calculateForProvider(provider: InsuranceProvider, missing_teeth: number){
 		let total_years = provider.prices.reduce(
@@ -170,9 +134,9 @@ export class MainviewComponent implements OnInit {
 
 	private getRandomColor():string {
 		return [
-			Math.floor(Math.random()*128), 
-			Math.floor(Math.random()*128), 
-			Math.floor(Math.random()*128)
+			Math.floor(Math.random()*255), 
+			Math.floor(Math.random()*228), 
+			Math.floor(Math.random()*228)
 		].join(',');
 	}
 

@@ -6,15 +6,13 @@
 
 	<h2>Missing tooth price:</h2>
 	<input type="number" [(ngModel)]="missing_tooth_price">
+
+	<h2>Calculate for missing teeth between:</h2>
+	<input type="number" [(ngModel)]="missing_teeth_min">
+	<input type="number" [(ngModel)]="missing_teeth_max">
 </div>
 <div class="results">
 	<h2>Results *:</h2> <a href="#" (click)="calculate()">(re-)calculate</a>
-<!-- 	<span *ngFor="let result of results">
-		{{result.name}}
-		<ul>
-			<li *ngFor="let overpaid of result.results; let teeth_missing = index">Teeth missing: {{teeth_missing}}, overpaid: {{overpaid | currency: 'EUR' : true}}</li>
-		</ul>
-	</span> -->
 	* positive overpaids are bad
 
 <canvas class="diagram" *ngIf="lineChartData.length > 0" baseChart width="400" height="400"
