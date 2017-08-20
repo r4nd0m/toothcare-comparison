@@ -197,42 +197,10 @@ var MainviewComponent = (function () {
     function MainviewComponent() {
         this.providers = [];
         this.missing_tooth_price = 1500;
-        this.results = [];
+        this.missing_teeth_min = 2;
+        this.missing_teeth_max = 15;
         this.lineChartData = [];
-        this.lineChartLabels = [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            29,
-            30,
-            31
-        ];
+        this.lineChartLabels = [];
         this.lineChartOptions = {
             responsive: true
         };
@@ -263,13 +231,18 @@ var MainviewComponent = (function () {
     };
     MainviewComponent.prototype.calculate = function () {
         var _this = this;
-        this.results = [];
+        this.lineChartColors.splice(0, this.lineChartData.length);
+        this.lineChartData = [];
+        this.lineChartLabels.splice(0, this.lineChartLabels.length);
+        for (var teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++) {
+            this.lineChartLabels.push(teeth_count);
+        }
         this.providers.forEach(function (provider) {
-            var result = { name: provider.name, results: [] };
-            for (var teeth_count = 0; teeth_count <= 32; teeth_count++) {
-                result.results.push(_this.calculateForProvider(provider, teeth_count).overpaid);
+            var result = { label: provider.name, data: [] };
+            for (var teeth_count = _this.missing_teeth_min; teeth_count <= _this.missing_teeth_max; teeth_count++) {
+                result.data.push(_this.calculateForProvider(provider, teeth_count).overpaid);
             }
-            _this.results.push(result);
+            _this.lineChartData.push(result);
             var random_color_rgb = _this.getRandomColor();
             _this.lineChartColors.push({
                 backgroundColor: 'rgba(' + random_color_rgb + ',0.1)',
@@ -278,13 +251,6 @@ var MainviewComponent = (function () {
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-            });
-        });
-        this.lineChartData = [];
-        this.results.forEach(function (item) {
-            _this.lineChartData.push({
-                data: item.results,
-                label: item.name
             });
         });
     };
@@ -313,9 +279,9 @@ var MainviewComponent = (function () {
     };
     MainviewComponent.prototype.getRandomColor = function () {
         return [
-            Math.floor(Math.random() * 128),
-            Math.floor(Math.random() * 128),
-            Math.floor(Math.random() * 128)
+            Math.floor(Math.random() * 255),
+            Math.floor(Math.random() * 228),
+            Math.floor(Math.random() * 228)
         ].join(',');
     };
     return MainviewComponent;
@@ -670,7 +636,7 @@ module.exports = "<p>\r\n\tName: <input name=\"provider_name\" [(ngModel)]=\"pro
 /***/ 310:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"inputs\">\r\n\t<h2>Providers:</h2>\r\n\t<insurance-provider *ngFor=\"let provider of providers; let i=index;\" [(provider)]=\"providers[i]\" (onRemove)=\"removeProvider(i)\"></insurance-provider>\r\n\t<span *ngIf=\"providers.length === 0\">No providers selected</span>\r\n\t<a (click)=\"addProvider()\" href=\"#\">add provider</a>\r\n\r\n\t<h2>Missing tooth price:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_tooth_price\">\r\n</div>\r\n<div class=\"results\">\r\n\t<h2>Results *:</h2> <a href=\"#\" (click)=\"calculate()\">(re-)calculate</a>\r\n<!-- \t<span *ngFor=\"let result of results\">\r\n\t\t{{result.name}}\r\n\t\t<ul>\r\n\t\t\t<li *ngFor=\"let overpaid of result.results; let teeth_missing = index\">Teeth missing: {{teeth_missing}}, overpaid: {{overpaid | currency: 'EUR' : true}}</li>\r\n\t\t</ul>\r\n\t</span> -->\r\n\t* positive overpaids are bad\r\n\r\n<canvas class=\"diagram\" *ngIf=\"lineChartData.length > 0\" baseChart width=\"400\" height=\"400\"\r\n\t[datasets]=\"lineChartData\"\r\n\t[labels]=\"lineChartLabels\"\r\n\t[options]=\"lineChartOptions\"\r\n\t[colors]=\"lineChartColors\"\r\n\t[legend]=\"lineChartLegend\"\r\n\t[chartType]=\"lineChartType\"\r\n\t(chartHover)=\"chartHovered($event)\"\r\n\t(chartClick)=\"chartClicked($event)\"></canvas>\r\n</div>"
+module.exports = "<div class=\"inputs\">\r\n\t<h2>Providers:</h2>\r\n\t<insurance-provider *ngFor=\"let provider of providers; let i=index;\" [(provider)]=\"providers[i]\" (onRemove)=\"removeProvider(i)\"></insurance-provider>\r\n\t<span *ngIf=\"providers.length === 0\">No providers selected</span>\r\n\t<a (click)=\"addProvider()\" href=\"#\">add provider</a>\r\n\r\n\t<h2>Missing tooth price:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_tooth_price\">\r\n\r\n\t<h2>Calculate for missing teeth between:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_min\">\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_max\">\r\n</div>\r\n<div class=\"results\">\r\n\t<h2>Results *:</h2> <a href=\"#\" (click)=\"calculate()\">(re-)calculate</a>\r\n\t* positive overpaids are bad\r\n\r\n<canvas class=\"diagram\" *ngIf=\"lineChartData.length > 0\" baseChart width=\"400\" height=\"400\"\r\n\t[datasets]=\"lineChartData\"\r\n\t[labels]=\"lineChartLabels\"\r\n\t[options]=\"lineChartOptions\"\r\n\t[colors]=\"lineChartColors\"\r\n\t[legend]=\"lineChartLegend\"\r\n\t[chartType]=\"lineChartType\"\r\n\t(chartHover)=\"chartHovered($event)\"\r\n\t(chartClick)=\"chartClicked($event)\"></canvas>\r\n</div>"
 
 /***/ }),
 
