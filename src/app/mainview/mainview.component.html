@@ -2,7 +2,7 @@
 	<h2>Providers:</h2>
 	<insurance-provider *ngFor="let provider of providers; let i=index;" [(provider)]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
 	<span *ngIf="providers.length === 0">No providers selected</span>
-	<a (click)="addProvider()" href="#">add provider</a>
+	<a href="javascript:void(0)" (click)="addProvider()">add provider</a>
 
 	<h2>Missing tooth price:</h2>
 	<input type="number" [(ngModel)]="missing_tooth_price">
@@ -12,7 +12,7 @@
 	<input type="number" [(ngModel)]="missing_teeth_max">
 </div>
 <div class="results">
-	<h2>Results *:</h2> <a href="#" (click)="calculate()">(re-)calculate</a>
+	<h2>Results *:</h2> <a *ngIf="lineChartData.length === 0" href="javascript:void(0)" (click)="calculate()">calculate</a> <a *ngIf="lineChartData.length > 0" href="javascript:void(0)" (click)="lineChartData = []">reset</a>
 	* positive overpaids are bad
 
 <canvas class="diagram" *ngIf="lineChartData.length > 0" baseChart width="400" height="400"

@@ -69,34 +69,36 @@ export class MainviewComponent implements OnInit {
 		this.providers.splice(index, 1);
 	}
 
-calculate(){
-	this.lineChartColors.splice(0, this.lineChartColors.length);
-	this.lineChartData = [];
-	this.lineChartLabels.splice(0, this.lineChartLabels.length);
+	calculate(){
+		this.lineChartColors.splice(0, this.lineChartColors.length);
+		this.lineChartData = [];
+		this.lineChartLabels.splice(0, this.lineChartLabels.length);
 
-	for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
-		this.lineChartLabels.push(teeth_count);
-	}
-
-	this.providers.forEach((provider) => {
-		let result = {label: provider.name, data: []};
 		for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
-			result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
+			this.lineChartLabels.push(teeth_count);
 		}
 
-		this.lineChartData.push(result);
+		this.providers.forEach((provider) => {
+			let result = {label: provider.name, data: []};
+			for(let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++){
+				result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
+			}
 
-		let random_color_rgb = this.getRandomColor();
+			this.lineChartData.push(result);
 
-		this.lineChartColors.push({
-			backgroundColor: 'rgba(' + random_color_rgb + ',0.1)',
-			borderColor: 'rgba(' + random_color_rgb + ',1)',
-			pointBackgroundColor: 'rgba(148,159,177,1)',
-			pointBorderColor: '#fff',
-			pointHoverBackgroundColor: '#fff',
-			pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-		});
-	})
+			let random_color_rgb = this.getRandomColor();
+
+			this.lineChartColors.push({
+				backgroundColor: 'rgba(' + random_color_rgb + ',0.1)',
+				borderColor: 'rgba(' + random_color_rgb + ',1)',
+				pointBackgroundColor: 'rgba(148,159,177,1)',
+				pointBorderColor: '#fff',
+				pointHoverBackgroundColor: '#fff',
+				pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+			});
+		})
+
+		this.lineChartData.slice();
 	}
 
 	calculateForProvider(provider: InsuranceProvider, missing_teeth: number){
