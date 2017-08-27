@@ -24,4 +24,8 @@ export class InsuranceProviderComponent implements OnInit {
 		this.removeEmitter.emit(null);
 	}
 
+	removePrice(index: number) {
+		this.provider.prices.splice(index, 1);
+	}
+
 }

@@ -5,14 +5,15 @@
 	Coverage part (%): <input name="provider_coverage_part" [(ngModel)]="provider.coverage_part" value="{{provider.coverage_part}}">
 	<br>
 	Prices: 
-		<span *ngFor="let price of provider.prices">
+		<span *ngFor="let price of provider.prices; let i = index;">
 			<br>
 			Age <input name="period_start" [(ngModel)]="price.period.start" placeholder="Age at period start" type="number" min="16" max="70">
 			- <input name="period_end" [(ngModel)]="price.period.end" placeholder="Age at period end" type="number" min="16" max="70">
 			:
 			<input name="period_price" [(ngModel)]="price.price" placeholder="Price" type="text">
+			<a href="javascript:void(0)" (click)="removePrice(i)">[x]</a>
 		</span>
 		<span *ngIf="provider.prices.length === 0">no prices added</span>
 		<br>
-		<a href="#" (click)="addPrice()">add price</a>
+		<a href="javascript:void(0)" (click)="addPrice()">add price</a>
 </p>
