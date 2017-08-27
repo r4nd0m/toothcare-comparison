@@ -1,26 +1,44 @@
-<div class="inputs">
-	<h2>Providers:</h2>
-	<insurance-provider *ngFor="let provider of providers; let i=index;" [(provider)]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
-	<span *ngIf="providers.length === 0">No providers selected</span>
-	<a href="javascript:void(0)" (click)="addProvider()">add provider</a>
+<div class="row">
+	<div class="col inputs m2">
+		<h2>Providers:</h2>
+		<div class="form-group">
+			<insurance-provider *ngFor="let provider of providers; let i=index;" [(provider)]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
+			<span *ngIf="providers.length === 0">No providers selected</span>
+			<button class="row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
+		</div>
+		<h2>Additional parameters:</h2>
+		<div class="form-group">
+			<label for="missing_tooth_price">Missing tooth price:</label>
+			<input class="form-control" id="missing_tooth_price" type="number" [(ngModel)]="missing_tooth_price">
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<label for="missing_teeth_min" class="col-lg-12">Calculate for missing teeth between:</label>
+				<input class="form-control col-lg-2" type="number" [(ngModel)]="missing_teeth_min">
+				<div class="col-lg-1">and</div>
+				<input class="form-control col-lg-2" type="number" [(ngModel)]="missing_teeth_max">
+			</div>
+		</div>
+	</div>
+	<div class="col results m2">
+		<h2>Results (positive overpaids are bad):</h2>
+		<button [disabled]="this.calculating" class="btn btn-primary" (click)="recalculate()">
+			<span *ngIf="!this.calculating">
+				<span *ngIf="lineChartData.length !== 0">re</span>calculate
+			</span>
+			<span *ngIf="this.calculating">
+				calculating...
+			</span>
+			</button>
 
-	<h2>Missing tooth price:</h2>
-	<input type="number" [(ngModel)]="missing_tooth_price">
-
-	<h2>Calculate for missing teeth between:</h2>
-	<input type="number" [(ngModel)]="missing_teeth_min">
-	<input type="number" [(ngModel)]="missing_teeth_max">
-</div>
-<div class="results">
-	<h2>Results (positive overpaids are bad):</h2> <a href="javascript:void(0)" (click)="recalculate()"><span *ngIf="lineChartData.length !== 0">re</span>calculate</a>
-
-<canvas class="diagram" *ngIf="lineChartData.length > 0" baseChart width="400" height="400"
-	[datasets]="lineChartData"
-	[labels]="lineChartLabels"
-	[options]="lineChartOptions"
-	[colors]="lineChartColors"
-	[legend]="lineChartLegend"
-	[chartType]="lineChartType"
-	(chartHover)="chartHovered($event)"
-	(chartClick)="chartClicked($event)"></canvas>
+		<canvas class="diagram" *ngIf="lineChartData.length > 0" baseChart width="400" height="400"
+			[datasets]="lineChartData"
+			[labels]="lineChartLabels"
+			[options]="lineChartOptions"
+			[colors]="lineChartColors"
+			[legend]="lineChartLegend"
+			[chartType]="lineChartType"
+			(chartHover)="chartHovered($event)"
+			(chartClick)="chartClicked($event)"></canvas>
+		</div>
 </div>

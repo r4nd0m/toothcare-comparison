@@ -12,6 +12,8 @@ export class MainviewComponent implements OnInit {
 	missing_teeth_min = 2;
 	missing_teeth_max = 15;
 
+	calculating = false;
+
 	lineChartData: Array<any> = [];
 	lineChartLabels: Array<any> = [];
 
@@ -90,8 +92,12 @@ export class MainviewComponent implements OnInit {
 	}
 
 	recalculate() {
+		this.calculating = true;
 		this.lineChartData = [];
-		setTimeout(() => this.calculate(), 100);
+		setTimeout(() => {
+			this.calculate();
+			this.calculating = false;
+		}, 2000);
 	}
 
 	calculate() {
@@ -122,8 +128,6 @@ export class MainviewComponent implements OnInit {
 				pointHoverBorderColor: 'rgba(148,159,177,0.8)'
 			});
 		})
-
-		this.lineChartData.slice();
 	}
 
 	calculateForProvider(provider: InsuranceProvider, missing_teeth: number) {
