@@ -97,7 +97,7 @@ export class MainviewComponent implements OnInit {
 		setTimeout(() => {
 			this.calculate();
 			this.calculating = false;
-		}, 2000);
+		}, 10);
 	}
 
 	calculate() {
