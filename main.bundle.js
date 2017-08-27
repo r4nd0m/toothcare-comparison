@@ -151,6 +151,9 @@ var InsuranceProviderComponent = (function () {
     InsuranceProviderComponent.prototype.removeProvider = function () {
         this.removeEmitter.emit(null);
     };
+    InsuranceProviderComponent.prototype.removePrice = function (index) {
+        this.provider.prices.splice(index, 1);
+    };
     return InsuranceProviderComponent;
 }());
 __decorate([
@@ -199,6 +202,7 @@ var MainviewComponent = (function () {
         this.missing_tooth_price = 1500;
         this.missing_teeth_min = 2;
         this.missing_teeth_max = 15;
+        this.calculating = false;
         this.lineChartData = [];
         this.lineChartLabels = [];
         this.lineChartOptions = {
@@ -219,7 +223,15 @@ var MainviewComponent = (function () {
             new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](37, 39), 11.85),
             new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](40, 49), 17.91),
             new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](50, 59), 26.23),
-        ], 50));
+        ], 50), new __WEBPACK_IMPORTED_MODULE_1__model__["a" /* InsuranceProvider */]("Württembergische", [
+            new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](37, 39), 34.37),
+            new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](40, 49), 41.67),
+            new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](50, 59), 47.63),
+        ], 90), new __WEBPACK_IMPORTED_MODULE_1__model__["a" /* InsuranceProvider */]("Die Bayerische", [
+            new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](37, 39), 32.6),
+            new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](40, 49), 41.4),
+            new __WEBPACK_IMPORTED_MODULE_1__model__["b" /* InsurancePrice */](new __WEBPACK_IMPORTED_MODULE_1__model__["c" /* InsurancePeriod */](50, 59), 54.4),
+        ], 100));
     }
     MainviewComponent.prototype.ngOnInit = function () {
     };
@@ -228,6 +240,15 @@ var MainviewComponent = (function () {
     };
     MainviewComponent.prototype.removeProvider = function (index) {
         this.providers.splice(index, 1);
+    };
+    MainviewComponent.prototype.recalculate = function () {
+        var _this = this;
+        this.calculating = true;
+        this.lineChartData = [];
+        setTimeout(function () {
+            _this.calculate();
+            _this.calculating = false;
+        }, 2000);
     };
     MainviewComponent.prototype.calculate = function () {
         var _this = this;
@@ -253,7 +274,6 @@ var MainviewComponent = (function () {
                 pointHoverBorderColor: 'rgba(148,159,177,0.8)'
             });
         });
-        this.lineChartData.slice();
     };
     MainviewComponent.prototype.calculateForProvider = function (provider, missing_teeth) {
         var total_years = provider.prices.reduce(function (acc, price) {
@@ -271,11 +291,11 @@ var MainviewComponent = (function () {
         return {
             name: provider.name,
             total_years: total_years,
-            total_coverage_price: total_coverage_price,
-            total_treatment_price: total_treatment_price,
-            self_paid: self_paid,
-            total_paid: total_paid,
-            overpaid: total_paid - total_treatment_price
+            total_coverage_price: total_coverage_price.toFixed(2),
+            total_treatment_price: total_treatment_price.toFixed(2),
+            self_paid: self_paid.toFixed(2),
+            total_paid: total_paid.toFixed(2),
+            overpaid: (total_paid - total_treatment_price).toFixed(2)
         };
     };
     MainviewComponent.prototype.getRandomColor = function () {
@@ -305,8 +325,13 @@ MainviewComponent = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+// The file contents for the current environment will overwrite these during build.
 var environment = {
-    production: true
+    production: false
 };
 //# sourceMappingURL=environment.js.map
 
@@ -356,7 +381,7 @@ exports = module.exports = __webpack_require__(23)();
 
 
 // module
-exports.push([module.i, ".inputs{\r\n\twidth: 50%;\r\n\tfloat: left\r\n}\r\n.results{\r\n\twidth: 50%;\r\n\tfloat: right;\r\n}\r\n.diagram{\r\n\tclear: both;\r\n\tfloat: left;\r\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -630,14 +655,14 @@ module.exports = "<mainview></mainview>"
 /***/ 309:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n\tName: <input name=\"provider_name\" [(ngModel)]=\"provider.name\" value=\"{{provider.name}}\">\r\n\t<a href=\"#\" (click)=\"removeProvider()\">[x]</a>\r\n\t<br>\r\n\tCoverage part (%): <input name=\"provider_coverage_part\" [(ngModel)]=\"provider.coverage_part\" value=\"{{provider.coverage_part}}\">\r\n\t<br>\r\n\tPrices: \r\n\t\t<span *ngFor=\"let price of provider.prices\">\r\n\t\t\t<br>\r\n\t\t\tAge <input name=\"period_start\" [(ngModel)]=\"price.period.start\" placeholder=\"Age at period start\" type=\"number\" min=\"16\" max=\"70\">\r\n\t\t\t- <input name=\"period_end\" [(ngModel)]=\"price.period.end\" placeholder=\"Age at period end\" type=\"number\" min=\"16\" max=\"70\">\r\n\t\t\t:\r\n\t\t\t<input name=\"period_price\" [(ngModel)]=\"price.price\" placeholder=\"Price\" type=\"text\">\r\n\t\t</span>\r\n\t\t<span *ngIf=\"provider.prices.length === 0\">no prices added</span>\r\n\t\t<br>\r\n\t\t<a href=\"#\" (click)=\"addPrice()\">add price</a>\r\n</p>"
+module.exports = "<div class=\"form-group\">\r\n\t<label class=\"row col\" for=\"provider_name\">Name:</label>\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-10\">\r\n\t\t\t<input class=\"form-control\" id=\"provider_name\" name=\"provider_name\" [(ngModel)]=\"provider.name\" value=\"{{provider.name}}\">\r\n\t\t</div>\r\n\t\t<div class=\"col-md-2\">\r\n\t\t\t<button class=\"btn btn-outline-danger\" (click)=\"removeProvider()\">remove</button>\r\n\t\t</div>\r\n\t</div>\r\n</div>\r\n<div class=\"form-group\">\r\n\t<label class=\"row col\" for=\"provider_coverage_part\">Coverage part (%):</label>\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-10\">\r\n\t\t\t<input class=\"form-control\" id=\"provider_coverage_part\" name=\"provider_coverage_part\" [(ngModel)]=\"provider.coverage_part\" value=\"{{provider.coverage_part}}\">\r\n\t\t</div>\r\n\t</div>\r\n</div>\r\n<div class=\"form-group\">\r\n\t<label class=\"row col\">Prices:</label>\r\n\t<div class=\"row\" *ngFor=\"let price of provider.prices; let i = index;\">\r\n\t\t<div class=\"col-md-1 mt-2\">\r\n\t\t\tAge\r\n\t\t</div>\r\n\t\t<div class=\"col-md-2 mt-2\">\r\n\t\t\t<input class=\"form-control\" name=\"period_start\" [(ngModel)]=\"price.period.start\" placeholder=\"Age at period start\" type=\"number\" min=\"16\" max=\"70\">\r\n\t\t</div>\r\n\t\t<div class=\"col-md-1 mt-2\">\r\n\t\t\t- \r\n\t\t</div>\r\n\t\t<div class=\"col-md-2 mt-2\">\r\n\t\t\t<input class=\"form-control\" name=\"period_end\" [(ngModel)]=\"price.period.end\" placeholder=\"Age at period end\" type=\"number\" min=\"16\" max=\"70\">\r\n\t\t</div>\r\n\t\t<div class=\"col-md-1 mt-2\">\r\n\t\t\t:\r\n\t\t</div>\r\n\t\t<div class=\"col-md-2 mt-2\">\r\n\t\t\t<input class=\"form-control\" name=\"period_price\" [(ngModel)]=\"price.price\" placeholder=\"Price\" type=\"number\" min=\"0\" max=\"999\" step=\"0.1\">\r\n\t\t</div>\r\n\t\t<div class=\"col-md-3 mt-2\">\r\n\t\t\t<button class=\"btn btn-outline-danger\" (click)=\"removePrice(i)\">remove</button>\r\n\t\t</div>\r\n\t\t<span *ngIf=\"provider.prices.length === 0\">no prices added</span>\r\n\t</div>\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col btn-toolbar m-2\" role=\"toolbar\">\r\n\t\t\t<button class=\"btn btn-outline-primary float-right\" (click)=\"addPrice()\">add price</button>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 310:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"inputs\">\r\n\t<h2>Providers:</h2>\r\n\t<insurance-provider *ngFor=\"let provider of providers; let i=index;\" [(provider)]=\"providers[i]\" (onRemove)=\"removeProvider(i)\"></insurance-provider>\r\n\t<span *ngIf=\"providers.length === 0\">No providers selected</span>\r\n\t<a href=\"javascript:void(0)\" (click)=\"addProvider()\">add provider</a>\r\n\r\n\t<h2>Missing tooth price:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_tooth_price\">\r\n\r\n\t<h2>Calculate for missing teeth between:</h2>\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_min\">\r\n\t<input type=\"number\" [(ngModel)]=\"missing_teeth_max\">\r\n</div>\r\n<div class=\"results\">\r\n\t<h2>Results *:</h2> <a *ngIf=\"lineChartData.length === 0\" href=\"javascript:void(0)\" (click)=\"calculate()\">calculate</a> <a *ngIf=\"lineChartData.length > 0\" href=\"javascript:void(0)\" (click)=\"lineChartData = []\">reset</a>\r\n\t* positive overpaids are bad\r\n\r\n<canvas class=\"diagram\" *ngIf=\"lineChartData.length > 0\" baseChart width=\"400\" height=\"400\"\r\n\t[datasets]=\"lineChartData\"\r\n\t[labels]=\"lineChartLabels\"\r\n\t[options]=\"lineChartOptions\"\r\n\t[colors]=\"lineChartColors\"\r\n\t[legend]=\"lineChartLegend\"\r\n\t[chartType]=\"lineChartType\"\r\n\t(chartHover)=\"chartHovered($event)\"\r\n\t(chartClick)=\"chartClicked($event)\"></canvas>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n\t<div class=\"col inputs m2\">\r\n\t\t<h2>Providers:</h2>\r\n\t\t<div class=\"form-group\">\r\n\t\t\t<insurance-provider *ngFor=\"let provider of providers; let i=index;\" [(provider)]=\"providers[i]\" (onRemove)=\"removeProvider(i)\"></insurance-provider>\r\n\t\t\t<span *ngIf=\"providers.length === 0\">No providers selected</span>\r\n\t\t\t<button class=\"row col m-2 btn btn-outline-primary\" (click)=\"addProvider()\">add provider</button>\r\n\t\t</div>\r\n\t\t<h2>Additional parameters:</h2>\r\n\t\t<div class=\"form-group\">\r\n\t\t\t<label for=\"missing_tooth_price\">Missing tooth price:</label>\r\n\t\t\t<input class=\"form-control\" id=\"missing_tooth_price\" type=\"number\" [(ngModel)]=\"missing_tooth_price\">\r\n\t\t</div>\r\n\t\t<div class=\"form-group\">\r\n\t\t\t<div class=\"row\">\r\n\t\t\t\t<label for=\"missing_teeth_min\" class=\"col-lg-12\">Calculate for missing teeth between:</label>\r\n\t\t\t\t<input class=\"form-control col-lg-2\" type=\"number\" [(ngModel)]=\"missing_teeth_min\">\r\n\t\t\t\t<div class=\"col-lg-1\">and</div>\r\n\t\t\t\t<input class=\"form-control col-lg-2\" type=\"number\" [(ngModel)]=\"missing_teeth_max\">\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col results m2\">\r\n\t\t<h2>Results (positive overpaids are bad):</h2>\r\n\t\t<button [disabled]=\"this.calculating\" class=\"btn btn-primary\" (click)=\"recalculate()\">\r\n\t\t\t<span *ngIf=\"!this.calculating\">\r\n\t\t\t\t<span *ngIf=\"lineChartData.length !== 0\">re</span>calculate\r\n\t\t\t</span>\r\n\t\t\t<span *ngIf=\"this.calculating\">\r\n\t\t\t\tcalculating...\r\n\t\t\t</span>\r\n\t\t\t</button>\r\n\r\n\t\t<canvas class=\"diagram\" *ngIf=\"lineChartData.length > 0\" baseChart width=\"400\" height=\"400\"\r\n\t\t\t[datasets]=\"lineChartData\"\r\n\t\t\t[labels]=\"lineChartLabels\"\r\n\t\t\t[options]=\"lineChartOptions\"\r\n\t\t\t[colors]=\"lineChartColors\"\r\n\t\t\t[legend]=\"lineChartLegend\"\r\n\t\t\t[chartType]=\"lineChartType\"\r\n\t\t\t(chartHover)=\"chartHovered($event)\"\r\n\t\t\t(chartClick)=\"chartClicked($event)\"></canvas>\r\n\t\t</div>\r\n</div>"
 
 /***/ }),
 
