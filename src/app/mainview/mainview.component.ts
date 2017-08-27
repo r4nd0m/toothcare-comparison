@@ -89,6 +89,11 @@ export class MainviewComponent implements OnInit {
 		this.providers.splice(index, 1);
 	}
 
+	recalculate() {
+		this.lineChartData = [];
+		setTimeout(() => this.calculate(), 100);
+	}
+
 	calculate() {
 		this.lineChartColors.splice(0, this.lineChartColors.length);
 		this.lineChartData = [];

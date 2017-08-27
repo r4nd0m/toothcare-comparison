@@ -12,8 +12,7 @@
 	<input type="number" [(ngModel)]="missing_teeth_max">
 </div>
 <div class="results">
-	<h2>Results *:</h2> <a *ngIf="lineChartData.length === 0" href="javascript:void(0)" (click)="calculate()">calculate</a> <a *ngIf="lineChartData.length > 0" href="javascript:void(0)" (click)="lineChartData = []">reset</a>
-	* positive overpaids are bad
+	<h2>Results (positive overpaids are bad):</h2> <a href="javascript:void(0)" (click)="recalculate()"><span *ngIf="lineChartData.length !== 0">re</span>calculate</a>
 
 <canvas class="diagram" *ngIf="lineChartData.length > 0" baseChart width="400" height="400"
 	[datasets]="lineChartData"
