@@ -43,8 +43,8 @@ export class InsurancePrice {
 }
 
 export class InsurancePeriod {
-	start: 	number; // ages at the start and end of insurance period
-	end:	number;
+	start!: number; // ages at the start and end of insurance period
+	end!: number;
 
 	constructor(start?: number, end?: number){
 		if(start !== undefined){

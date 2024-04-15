@@ -32,8 +32,7 @@ export class MainviewComponent implements OnInit {
 				[
 					new InsurancePrice(new InsurancePeriod(37, 39), 25.2),
 					new InsurancePrice(new InsurancePeriod(40, 49), 38.18),
-					new InsurancePrice(new InsurancePeriod(50, 59), 50.14),
-					//new InsurancePrice(new InsurancePeriod(60, 100), 61.97)
+					new InsurancePrice(new InsurancePeriod(50, 59), 50.14)
 				],
 				90
 			),
@@ -42,8 +41,7 @@ export class MainviewComponent implements OnInit {
 				[
 					new InsurancePrice(new InsurancePeriod(37, 39), 17.44),
 					new InsurancePrice(new InsurancePeriod(40, 49), 25.99),
-					new InsurancePrice(new InsurancePeriod(50, 59), 37.51),
-					//new InsurancePrice(new InsurancePeriod(60, 100), 46.35)
+					new InsurancePrice(new InsurancePeriod(50, 59), 37.51)
 				],
 				70
 			),
@@ -52,8 +50,7 @@ export class MainviewComponent implements OnInit {
 				[
 					new InsurancePrice(new InsurancePeriod(37, 39), 11.85),
 					new InsurancePrice(new InsurancePeriod(40, 49), 17.91),
-					new InsurancePrice(new InsurancePeriod(50, 59), 26.23),
-					//new InsurancePrice(new InsurancePeriod(60, 100), 32.62)
+					new InsurancePrice(new InsurancePeriod(50, 59), 26.23)
 				],
 				50
 			),
@@ -62,8 +59,7 @@ export class MainviewComponent implements OnInit {
 				[
 					new InsurancePrice(new InsurancePeriod(37, 39), 34.37),
 					new InsurancePrice(new InsurancePeriod(40, 49), 41.67),
-					new InsurancePrice(new InsurancePeriod(50, 59), 47.63),
-					//new InsurancePrice(new InsurancePeriod(60, 100), 53.96)
+					new InsurancePrice(new InsurancePeriod(50, 59), 47.63)
 				],
 				90
 			),
@@ -72,8 +68,7 @@ export class MainviewComponent implements OnInit {
 				[
 					new InsurancePrice(new InsurancePeriod(37, 39), 32.6),
 					new InsurancePrice(new InsurancePeriod(40, 49), 41.4),
-					new InsurancePrice(new InsurancePeriod(50, 59), 54.4),
-					//new InsurancePrice(new InsurancePeriod(60, 100), 66.2)
+					new InsurancePrice(new InsurancePeriod(50, 59), 54.4)
 				],
 				100
 			)
@@ -110,23 +105,21 @@ export class MainviewComponent implements OnInit {
 		}
 
 		this.providers.forEach((provider) => {
-			let result = { label: provider.name, data: [] };
+
+			let random_color_rgb = this.getRandomColor();
+
+			let result = { 
+				label: provider.name, 
+				data: new Array(), 
+				backgroundColor: 'rgba(' + random_color_rgb + ',1)',  
+				borderColor: 'rgba(' + random_color_rgb + ',1)'
+			};
+			
 			for (let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++) {
 				result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
 			}
 
 			this.lineChartData.push(result);
-
-			let random_color_rgb = this.getRandomColor();
-
-			this.lineChartColors.push({
-				backgroundColor: 'rgba(' + random_color_rgb + ',0.1)',
-				borderColor: 'rgba(' + random_color_rgb + ',1)',
-				pointBackgroundColor: 'rgba(148,159,177,1)',
-				pointBorderColor: '#fff',
-				pointHoverBackgroundColor: '#fff',
-				pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-			});
 		})
 	}
 

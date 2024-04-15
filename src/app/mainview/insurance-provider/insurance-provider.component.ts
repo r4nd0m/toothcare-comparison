@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { InsuranceProvider } from '../model';
+import { InsuranceProvider } from '../../model';
 
 @Component({
 	selector: 'insurance-provider',
@@ -7,8 +7,10 @@ import { InsuranceProvider } from '../model';
 	styleUrls: ['./insurance-provider.component.css']
 })
 export class InsuranceProviderComponent implements OnInit {
-	@Input() provider: InsuranceProvider;
+	@Input() provider: InsuranceProvider = new InsuranceProvider();
 	@Output('onRemove') removeEmitter = new EventEmitter();
+
+	element_id = 'insurance_provider_' + Math.random() + Math.random();
 
 
 	constructor() { }

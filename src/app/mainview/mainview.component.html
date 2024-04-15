@@ -2,7 +2,7 @@
 	<div class="col inputs m-2">
 		<h2>Providers:</h2>
 		<div class="form-group">
-			<insurance-provider *ngFor="let provider of providers; let i=index;" [(provider)]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
+			<insurance-provider *ngFor="let provider of providers; let i=index;" [provider]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
 			<span *ngIf="providers.length === 0">No providers selected</span>
 			<button class="row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
 		</div>
@@ -19,7 +19,7 @@
 			<label for="missing_teeth_min">Calculate for missing teeth between:</label>
 			<div class="row">
 				<div class="col-lg-2">
-					<input class="form-control" type="number" [(ngModel)]="missing_teeth_min" min="0" max="32">
+					<input class="form-control" id="missing_teeth_min" type="number" [(ngModel)]="missing_teeth_min" min="0" max="32">
 				</div>
 				<div class="col-lg-1">and</div>
 				<div class="col-lg-2">
@@ -37,16 +37,14 @@
 			<span *ngIf="this.calculating">
 				calculating...
 			</span>
-			</button>
+		</button>
 
 		<canvas class="diagram" *ngIf="lineChartData.length > 0" baseChart width="400" height="400"
 			[datasets]="lineChartData"
 			[labels]="lineChartLabels"
 			[options]="lineChartOptions"
-			[colors]="lineChartColors"
 			[legend]="lineChartLegend"
-			[chartType]="lineChartType"
-			(chartHover)="chartHovered($event)"
-			(chartClick)="chartClicked($event)"></canvas>
-		</div>
+			[type]="'line'"
+		></canvas>
+	</div>
 </div>

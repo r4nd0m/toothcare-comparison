@@ -1,44 +1,44 @@
 <div class="form-group">
-	<label class="row col" for="provider_name">Name:</label>
+	<label class="row col" for="{{this.element_id}}_provider_name">Name:</label>
 	<div class="row">
 		<div class="col-md-10">
-			<input class="form-control" id="provider_name" name="provider_name" [(ngModel)]="provider.name" value="{{provider.name}}">
+			<input class="form-control" id="{{this.element_id}}_provider_name" name="provider_name" [(ngModel)]="provider.name">
 		</div>
-		<div class="col-md-2">
+		<div class="col">
 			<button class="btn btn-outline-danger" (click)="removeProvider()">remove</button>
 		</div>
 	</div>
 </div>
 <div class="form-group">
-	<label class="row col" for="provider_coverage_part">Coverage part (%):</label>
+	<label class="row col" for="{{this.element_id}}_provider_coverage_part">Coverage part (%):</label>
 	<div class="row">
 		<div class="col-md-10">
-			<input class="form-control" id="provider_coverage_part" name="provider_coverage_part" [(ngModel)]="provider.coverage_part" value="{{provider.coverage_part}}">
+			<input class="form-control" id="{{this.element_id}}_provider_coverage_part" name="provider_coverage_part" [(ngModel)]="provider.coverage_part">
 		</div>
 	</div>
 </div>
 <div class="form-group">
 	<label class="row col">Prices:</label>
 	<div class="row" *ngFor="let price of provider.prices; let i = index;">
-		<div class="col-md-1 mt-2">
+		<div class="col mt-2">
 			Age
 		</div>
-		<div class="col-md-2 mt-2">
+		<div class="col mt-2">
 			<input class="form-control" name="period_start" [(ngModel)]="price.period.start" placeholder="Age at period start" type="number" min="16" max="70">
 		</div>
-		<div class="col-md-1 mt-2">
+		<div class="col mt-2">
 			- 
 		</div>
-		<div class="col-md-2 mt-2">
+		<div class="col mt-2">
 			<input class="form-control" name="period_end" [(ngModel)]="price.period.end" placeholder="Age at period end" type="number" min="16" max="70">
 		</div>
-		<div class="col-md-1 mt-2">
+		<div class="col mt-2">
 			:
 		</div>
-		<div class="col-md-2 mt-2">
+		<div class="col mt-2">
 			<input class="form-control" name="period_price" [(ngModel)]="price.price" placeholder="Price" type="number" min="0" max="999" step="0.1">
 		</div>
-		<div class="col-md-3 mt-2">
+		<div class="col mt-2">
 			<button class="btn btn-outline-danger" (click)="removePrice(i)">remove</button>
 		</div>
 		<span *ngIf="provider.prices.length === 0">no prices added</span>
