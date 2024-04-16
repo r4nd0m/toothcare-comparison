@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { MainviewComponent } from './mainview/mainview.component';
 import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
