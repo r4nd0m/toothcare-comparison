@@ -1,10 +1,11 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Compiled output
+# Compiled output and other generated files
 /dist
 /tmp
 /out-tsc
 /bazel-out
+/cypress/screenshots
 
 # Node
 /node_modules
@@ -32,6 +33,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+.env
 
 # System files
 .DS_Store
