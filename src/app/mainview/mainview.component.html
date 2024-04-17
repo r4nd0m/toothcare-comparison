@@ -30,7 +30,7 @@
 	</div>
 	<div class="col results m-2">
 		<h2>Results (positive overpaids are bad):</h2>
-		<button [disabled]="this.calculating" class="btn btn-primary" (click)="recalculate()">
+		<button [disabled]="this.calculating" class="button-calculate btn btn-primary" (click)="recalculate()">
 			<span *ngIf="!this.calculating">
 				<span *ngIf="lineChartData.length !== 0">re</span>calculate
 			</span>
