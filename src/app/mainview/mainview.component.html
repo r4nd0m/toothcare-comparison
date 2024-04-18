@@ -2,7 +2,9 @@
 	<div class="col inputs m-2">
 		<h2>Providers:</h2>
 		<div class="form-group">
-			<insurance-provider *ngFor="let provider of providers; let i=index;" [provider]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
+			@for (provider of providers; track provider.name) {
+				<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)"></insurance-provider>
+			}
 			
 			@if ( providers.length === 0 ) {
 				<span class="message-no-providers">No providers selected</span>
