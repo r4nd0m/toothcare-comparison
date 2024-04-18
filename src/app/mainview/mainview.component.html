@@ -3,7 +3,11 @@
 		<h2>Providers:</h2>
 		<div class="form-group">
 			<insurance-provider *ngFor="let provider of providers; let i=index;" [provider]="providers[i]" (onRemove)="removeProvider(i)"></insurance-provider>
-			<span *ngIf="providers.length === 0">No providers selected</span>
+			
+			@if ( providers.length === 0 ) {
+				<span>No providers selected</span>
+			}
+
 			<button class="button-add-provider row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
 		</div>
 		<h2>Additional parameters:</h2>
@@ -31,12 +35,10 @@
 	<div class="col results m-2">
 		<h2>Results (positive overpaids are bad):</h2>
 		<button [disabled]="this.calculating" class="button-calculate btn btn-primary" (click)="recalculate()">
-			<span *ngIf="!this.calculating">
-				<span *ngIf="lineChartData.length !== 0">re</span>calculate
-			</span>
-			<span *ngIf="this.calculating">
+			@if ( !this.calculating ) { @if (lineChartData.length !== 0) {re}calculate }
+			@else {
 				calculating...
-			</span>
+			}
 		</button>
 
 		@if(lineChartData.length > 0) {
