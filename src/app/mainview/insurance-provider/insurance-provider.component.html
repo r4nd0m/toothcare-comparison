@@ -5,7 +5,7 @@
 			<input class="form-control" id="{{this.element_id}}_provider_name" name="provider_name" [(ngModel)]="provider.name">
 		</div>
 		<div class="col">
-			<button class="btn btn-outline-danger" (click)="removeProvider()">remove</button>
+			<button class="button-remove-provider btn btn-outline-danger" (click)="removeProvider()">remove</button>
 		</div>
 	</div>
 </div>
@@ -19,7 +19,7 @@
 </div>
 <div class="form-group">
 	<label class="row col">Prices:</label>
-	<div class="row" *ngFor="let price of provider.prices; let i = index;">
+	<div class="row row-provider-price" *ngFor="let price of provider.prices; let i = index;">
 		<div class="col mt-2">
 			Age
 		</div>
@@ -39,13 +39,13 @@
 			<input class="form-control" name="period_price" [(ngModel)]="price.price" placeholder="Price" type="number" min="0" max="999" step="0.1">
 		</div>
 		<div class="col mt-2">
-			<button class="btn btn-outline-danger" (click)="removePrice(i)">remove</button>
+			<button class="button-remove-price btn btn-outline-danger" (click)="removePrice(i)">remove</button>
 		</div>
 		<span *ngIf="provider.prices.length === 0">no prices added</span>
 	</div>
 	<div class="row">
 		<div class="col btn-toolbar m-2" role="toolbar">
-			<button class="btn btn-outline-primary float-right" (click)="addPrice()">add price</button>
+			<button class="button-add-price btn btn-outline-primary float-right" (click)="addPrice()">add price</button>
 		</div>
 	</div>
 </div>
