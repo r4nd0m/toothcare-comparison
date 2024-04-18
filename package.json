@@ -10,7 +10,6 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
-    "cypress:chrome": "dotenv cypress run --browser %CHROME_PATH%",
     "cypress:edge": "cypress run --browser edge"
   },
   "private": true,
