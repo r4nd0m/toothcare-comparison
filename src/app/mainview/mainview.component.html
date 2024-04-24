@@ -36,11 +36,12 @@
 	</div>
 	<div class="col results m-2">
 		<h2>Results (positive overpaids are bad):</h2>
-		<button [disabled]="this.calculating" class="button-calculate btn btn-primary" (click)="recalculate()">
-			@if ( !this.calculating ) { @if (lineChartData.length !== 0) {re}calculate }
-			@else {
-				calculating...
-			}
+		<button
+			calculateButtonDirective
+			[calculatingInProgress]="this.calculating" 
+			[inputDataPresent]="providers.length > 0"
+			class="button-calculate btn btn-primary"
+			(click)="recalculate()">
 		</button>
 
 		@if(lineChartData.length > 0) {
