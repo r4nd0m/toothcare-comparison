@@ -86,6 +86,8 @@ export class MainviewComponent implements OnInit {
 	recalculate() {
 		this.calculating = true;
 		this.lineChartData = [];
+		this.lineChartLabels = [];
+		
 		setTimeout(() => {
 			this.lineChartData = this.calculationService.calculate(this.providers, this.missingTeethData);
 
