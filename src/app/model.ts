@@ -56,3 +56,26 @@ export class InsurancePeriod {
 		}
 	}
 }
+
+export type ProviderCalculationResult = {
+	label: string,
+	data: number[],
+	backgroundColor: string,
+	borderColor: string
+}
+
+export type ProviderCalculationResultItem = {
+	name: string,
+	total_years: string,
+	total_coverage_price: string,
+	total_treatment_price: string,
+	self_paid: string,
+	total_paid: string,
+	overpaid: number
+}
+
+export type MissingTeethData = {
+	teeth_min: number,
+	teeth_max: number,
+	tooth_price: number
+}

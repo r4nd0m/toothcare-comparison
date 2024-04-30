@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InsuranceProvider, InsurancePeriod, InsurancePrice } from '../model';
+import { InsuranceProvider, InsurancePeriod, InsurancePrice, MissingTeethData } from '../model';
+import { CalculationService } from '../calculation.service';
 
 @Component({
 	selector: 'mainview',
@@ -8,24 +9,20 @@ import { InsuranceProvider, InsurancePeriod, InsurancePrice } from '../model';
 })
 export class MainviewComponent implements OnInit {
 	providers: Array<InsuranceProvider> = [];
-	missing_tooth_price: number = 1500;
-	missing_teeth_min = 2;
-	missing_teeth_max = 15;
+	missingTeethData: MissingTeethData = {
+		teeth_min: 2,
+		teeth_max: 15,
+		tooth_price: 1500
+	};
 
 	calculating = false;
 
 	lineChartData: Array<any> = [];
 	lineChartLabels: Array<any> = [];
 
-	lineChartOptions: any = {
-		responsive: true
-	};
-
-	lineChartColors: Array<any> = [];
-	lineChartLegend: boolean = true;
 	lineChartType: string = 'line';
 
-	constructor() {
+	constructor(private calculationService: CalculationService) {
 		this.providers.push(
 			new InsuranceProvider(
 				"AOK Premium",
@@ -90,78 +87,14 @@ export class MainviewComponent implements OnInit {
 		this.calculating = true;
 		this.lineChartData = [];
 		setTimeout(() => {
-			this.calculate();
-			this.calculating = false;
-		}, 10);
-	}
+			this.lineChartData = this.calculationService.calculate(this.providers, this.missingTeethData);
 
-	calculate() {
-		this.lineChartColors.splice(0, this.lineChartColors.length);
-		this.lineChartData = [];
-		this.lineChartLabels.splice(0, this.lineChartLabels.length);
-
-		for (let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++) {
-			this.lineChartLabels.push(teeth_count);
-		}
-
-		this.providers.forEach((provider) => {
-
-			let random_color_rgb = this.getRandomColor();
-
-			let result = { 
-				label: provider.name, 
-				data: new Array(), 
-				backgroundColor: 'rgba(' + random_color_rgb + ',1)',  
-				borderColor: 'rgba(' + random_color_rgb + ',1)'
-			};
-			
-			for (let teeth_count = this.missing_teeth_min; teeth_count <= this.missing_teeth_max; teeth_count++) {
-				result.data.push(this.calculateForProvider(provider, teeth_count).overpaid);
+			for (let teethCount = this.missingTeethData.teeth_min; teethCount <= this.missingTeethData.teeth_max; teethCount++) {
+				this.lineChartLabels.push(teethCount);
 			}
 
-			this.lineChartData.push(result);
-		})
-	}
-
-	calculateForProvider(provider: InsuranceProvider, missing_teeth: number) {
-		let total_years = provider.prices.reduce(
-			(acc, price) => {
-				let total_years = 1 + price.period.end - price.period.start;
-
-				return acc + total_years;
-			},
-			0
-		);
-		let total_treatment_price = missing_teeth * this.missing_tooth_price;
-		let total_coverage_price = provider.prices.reduce(
-			(acc, price) => {
-				let total_years = 1 + price.period.end - price.period.start;
-				let period_price = price.price * total_years * 12;
-
-				return acc + period_price;
-			},
-			0
-		);
-		let self_paid = total_treatment_price * (1 - provider.coverage_part / 100); // how much to pay except the coverage
-		let total_paid = self_paid + total_coverage_price; 							// how much will be paid by user during the insurance time
-
-		return {
-			name: provider.name,
-			total_years: total_years,
-			total_coverage_price: total_coverage_price.toFixed(2),
-			total_treatment_price: total_treatment_price.toFixed(2),
-			self_paid: self_paid.toFixed(2),
-			total_paid: total_paid.toFixed(2),
-			overpaid: (total_paid - total_treatment_price).toFixed(2)
-		};
-	}
-
-	private getRandomColor(): string {
-		return [
-			Math.floor(Math.random() * 255),
-			Math.floor(Math.random() * 228),
-			Math.floor(Math.random() * 228)
-		].join(',');
+			this.calculating = false;
+		}, 10);
 	}
 
 }

@@ -17,7 +17,7 @@
 			<label for="missing_tooth_price">Missing tooth recovery price:</label>
 			<div class="row">
 				<div class="col-lg-2">
-					<input class="form-control" id="missing_tooth_price" type="number" step="0.1" [(ngModel)]="missing_tooth_price">
+					<input class="form-control" id="missing_tooth_price" type="number" step="0.1" [(ngModel)]="missingTeethData.tooth_price">
 				</div>
 			</div>
 		</div>
@@ -25,11 +25,11 @@
 			<label for="missing_teeth_min">Calculate for missing teeth between:</label>
 			<div class="row">
 				<div class="col-lg-2">
-					<input class="form-control" id="missing_teeth_min" type="number" [(ngModel)]="missing_teeth_min" min="0" max="32">
+					<input class="form-control" id="missing_teeth_min" type="number" [(ngModel)]="missingTeethData.teeth_min" min="0" max="32">
 				</div>
 				<div class="col-lg-1">and</div>
 				<div class="col-lg-2">
-					<input class="form-control" type="number" [(ngModel)]="missing_teeth_max" min="0" max="32">
+					<input class="form-control" type="number" [(ngModel)]="missingTeethData.teeth_max" min="0" max="32">
 				</div>
 			</div>
 		</div>
@@ -48,8 +48,8 @@
 			<canvas class="diagram" baseChart width="400" height="400"
 				[datasets]="lineChartData"
 				[labels]="lineChartLabels"
-				[options]="lineChartOptions"
-				[legend]="lineChartLegend"
+				[options]="{ responsive: true }"
+				[legend]="true"
 				[type]="'line'"
 			></canvas>
 		}
