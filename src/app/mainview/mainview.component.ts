@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InsuranceProvider, InsurancePeriod, InsurancePrice, MissingTeethData } from '../model';
+import { InsuranceProvider, InsurancePeriod, InsurancePrice, MissingTeethData, ProviderCalculationResult } from '../model';
 import { CalculationService } from '../calculation.service';
 
 @Component({
@@ -17,8 +17,8 @@ export class MainviewComponent implements OnInit {
 
 	calculating = false;
 
-	lineChartData: Array<any> = [];
-	lineChartLabels: Array<any> = [];
+	lineChartData: ProviderCalculationResult[] = [];
+	lineChartLabels: string[] = [];
 
 	lineChartType: string = 'line';
 
@@ -92,7 +92,7 @@ export class MainviewComponent implements OnInit {
 			this.lineChartData = this.calculationService.calculate(this.providers, this.missingTeethData);
 
 			for (let teethCount = this.missingTeethData.teeth_min; teethCount <= this.missingTeethData.teeth_max; teethCount++) {
-				this.lineChartLabels.push(teethCount);
+				this.lineChartLabels.push(teethCount.toString());
 			}
 
 			this.calculating = false;

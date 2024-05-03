@@ -8,7 +8,7 @@ export class CalculationService {
 
 	constructor() { }
 
-	public calculate(providers: InsuranceProvider[], missingTeethData: MissingTeethData): any[] {
+	public calculate(providers: InsuranceProvider[], missingTeethData: MissingTeethData): ProviderCalculationResult[] {
 		const lineChartData: ProviderCalculationResult[] = [];
 
 		providers.forEach((provider) => {
