@@ -13,7 +13,6 @@ export class InsuranceProviderComponent implements OnInit {
 
 	element_id = 'insurance_provider_' + Math.random() + Math.random();
 
-
 	constructor() { }
 
 	ngOnInit() {
@@ -26,7 +25,6 @@ export class InsuranceProviderComponent implements OnInit {
 
 	removeProvider() {
 		this.removeEmitter.emit(null);
-		this.updateEmitter.emit(null);
 	}
 
 	removePrice(index: number) {
