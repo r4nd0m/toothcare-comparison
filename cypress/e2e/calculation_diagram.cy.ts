@@ -1,6 +1,6 @@
 describe('Test calculation diagram', () => {
   it('Opens the application and checks if the calculation is working', () => {
-    cy.visit('http://localhost:4200/');
+    cy.visit('http://localhost:4200/diagram');
 
     // calculation button present
     cy.get('button.button-calculate').contains("calculate");
