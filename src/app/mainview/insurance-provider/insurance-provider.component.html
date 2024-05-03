@@ -2,7 +2,7 @@
 	<label class="row col" for="{{this.element_id}}_provider_name">Name:</label>
 	<div class="row">
 		<div class="col-md-10">
-			<input class="form-control" id="{{this.element_id}}_provider_name" name="provider_name" [(ngModel)]="provider.name">
+			<input class="form-control" id="{{this.element_id}}_provider_name" name="provider_name" [(ngModel)]="provider.name" (ngModelChange)="onModelChange()">
 		</div>
 		<div class="col">
 			<button class="button-remove-provider btn btn-outline-danger" (click)="removeProvider()">remove</button>
@@ -13,7 +13,7 @@
 	<label class="row col" for="{{this.element_id}}_provider_coverage_part">Coverage part (%):</label>
 	<div class="row">
 		<div class="col-md-10">
-			<input class="form-control" id="{{this.element_id}}_provider_coverage_part" name="provider_coverage_part" [(ngModel)]="provider.coverage_part">
+			<input class="form-control" id="{{this.element_id}}_provider_coverage_part" name="provider_coverage_part" [(ngModel)]="provider.coverage_part" (ngModelChange)="onModelChange()">
 		</div>
 	</div>
 </div>
@@ -25,19 +25,19 @@
 				Age
 			</div>
 			<div class="col mt-2">
-				<input class="form-control" name="period_start" [(ngModel)]="price.period.start" placeholder="Age at period start" type="number" min="16" max="70">
+				<input class="form-control" name="period_start" [(ngModel)]="price.period.start" (ngModelChange)="onModelChange()" placeholder="Age at period start" type="number" min="16" max="70">
 			</div>
 			<div class="col mt-2">
 				- 
 			</div>
 			<div class="col mt-2">
-				<input class="form-control" name="period_end" [(ngModel)]="price.period.end" placeholder="Age at period end" type="number" min="16" max="70">
+				<input class="form-control" name="period_end" [(ngModel)]="price.period.end" (ngModelChange)="onModelChange()" placeholder="Age at period end" type="number" min="16" max="70">
 			</div>
 			<div class="col mt-2">
 				:
 			</div>
 			<div class="col mt-2">
-				<input class="form-control" name="period_price" [(ngModel)]="price.price" placeholder="Price" type="number" min="0" max="999" step="0.1">
+				<input class="form-control" name="period_price" [(ngModel)]="price.price" (ngModelChange)="onModelChange()" placeholder="Price" type="number" min="0" max="999" step="0.1">
 			</div>
 			<div class="col mt-2">
 				<button class="button-remove-price btn btn-outline-danger" (click)="removePrice($index)">remove</button>

@@ -3,7 +3,7 @@
 		<h2>Providers:</h2>
 		<div class="form-group">
 			@for (provider of providers; track provider.name) {
-				<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)"></insurance-provider>
+				<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)" (onUpdate)="updateProvider($index, provider)"></insurance-provider>
 			}
 			
 			@if ( providers.length === 0 ) {
