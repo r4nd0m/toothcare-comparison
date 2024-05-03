@@ -4,11 +4,11 @@ import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
 
 @Component({
-	selector: 'mainview',
-	templateUrl: './mainview.component.html',
-	styleUrls: ['./mainview.component.css']
+	selector: 'providers',
+	templateUrl: './providers.component.html',
+	styleUrls: ['./providers.component.css']
 })
-export class MainviewComponent implements OnInit {
+export class ProvidersComponent implements OnInit {
 	providers: InsuranceProvider[] = [];
 
 	missingTeethData: MissingTeethData = {

@@ -1,4 +1,4 @@
-import { CalculateButtonDirective } from './calculate.button.directive.directive';
+import { CalculateButtonDirective } from './calculate.button.directive';
 
 describe('CalculateButtonDirective', () => {
   it('should create an instance', () => {
