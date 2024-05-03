@@ -24,9 +24,7 @@ export class DiagramComponent {
 	) {
 		this.providers = dataService.getProviders();
 
-		dataService.providersChanged.subscribe(
-			(providers: InsuranceProvider[]) => this.providers = providers
-		)
+    this.recalculate();
 	}
   
 	recalculate() {

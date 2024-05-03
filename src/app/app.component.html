@@ -1,10 +1,15 @@
 <div class="container">
     <div class="row">
-        <div class="col col-xs-12">
-            <providers></providers>
+        <div class="col">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="nav-item"><a class="nav-link" [ngClass]="{'active': router.url === '/'}" routerLink="/">Input data</a></li>
+                <li role="presentation" class="nav-item"><a class="nav-link" [ngClass]="{'active': router.url === '/diagram'}" routerLink="/diagram">Results</a></li>
+            </ul>
         </div>
-        <div class="col col-xs-12">
-            <diagram></diagram>
+    </div>
+    <div class="row">
+        <div class="col p-4">
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

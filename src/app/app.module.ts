@@ -8,6 +8,12 @@ import { InsuranceProviderComponent } from './providers/insurance-provider/insur
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { CalculateButtonDirective } from './providers/calculate.button.directive';
 import { DiagramComponent } from './diagram/diagram.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+	{ path: '', component: ProvidersComponent },
+	{ path: 'diagram', component: DiagramComponent}
+];
 
 @NgModule({
 	declarations: [
@@ -20,7 +26,8 @@ import { DiagramComponent } from './diagram/diagram.component';
 	imports: [
 		BaseChartDirective,
 		BrowserModule,
-		FormsModule
+		FormsModule,
+		RouterModule.forRoot(appRoutes)
 	],
 	providers: [provideCharts(withDefaultRegisterables())],
 	bootstrap: [AppComponent]
