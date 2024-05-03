@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DiagramComponent } from './diagram.component';
+import { AppModule } from '../app.module';
 
 describe('DiagramComponent', () => {
   let component: DiagramComponent;
@@ -8,7 +9,8 @@ describe('DiagramComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DiagramComponent]
+      imports: [ AppModule ],
+      declarations: [DiagramComponent]
     })
     .compileComponents();
     

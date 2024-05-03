@@ -1,60 +1,33 @@
-<div class="row">
-	<div class="col inputs m-2">
-		<h2>Providers:</h2>
-		<div class="form-group">
-			@for (provider of providers; track provider.name) {
-				<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)" (onUpdate)="updateProvider($index, provider)"></insurance-provider>
-			}
-			
-			@if ( providers.length === 0 ) {
-				<span class="message-no-providers">No providers selected</span>
-			}
+<h2>Providers:</h2>
+<div class="form-group">
+	@for (provider of providers; track provider.name) {
+		<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)" (onUpdate)="updateProvider($index, provider)"></insurance-provider>
+	}
+	
+	@if ( providers.length === 0 ) {
+		<span class="message-no-providers">No providers selected</span>
+	}
 
-			<button class="button-add-provider row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
-		</div>
-		<h2>Additional parameters:</h2>
-		<div class="form-group">
-			<label for="missing_tooth_price">Missing tooth recovery price:</label>
-			<div class="row">
-				<div class="col-lg-2">
-					<input class="form-control" id="missing_tooth_price" type="number" step="0.1" [(ngModel)]="missingTeethData.tooth_price">
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="missing_teeth_min">Calculate for missing teeth between:</label>
-			<div class="row">
-				<div class="col-lg-2">
-					<input class="form-control" id="missing_teeth_min" type="number" [(ngModel)]="missingTeethData.teeth_min" min="0" max="32">
-				</div>
-				<div class="col-lg-1">and</div>
-				<div class="col-lg-2">
-					<input class="form-control" type="number" [(ngModel)]="missingTeethData.teeth_max" min="0" max="32">
-				</div>
-			</div>
+	<button class="button-add-provider row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
+</div>
+<h2>Additional parameters:</h2>
+<div class="form-group">
+	<label for="missing_tooth_price">Missing tooth recovery price:</label>
+	<div class="row">
+		<div class="col-lg-2">
+			<input class="form-control" id="missing_tooth_price" type="number" step="0.1" [(ngModel)]="missingTeethData.tooth_price" (ngModelChange)="changeMissingTeethData()">
 		</div>
 	</div>
-	<div class="col results m-2">
-		<h2>Results (positive overpaids are bad):</h2>
-		<button
-			calculateButtonDirective
-			[calculatingInProgress]="this.calculating" 
-			[inputDataPresent]="providers.length > 0"
-			class="button-calculate btn btn-primary"
-			(click)="recalculate()">
-		</button>
-
-		@if(lineChartData.length > 0) {
-			<canvas class="diagram" baseChart width="400" height="400"
-				[datasets]="lineChartData"
-				[labels]="lineChartLabels"
-				[options]="{ responsive: true }"
-				[legend]="true"
-				[type]="'line'"
-			></canvas>
-		}
-		@else {
-			<p>Press the button to see the result</p>
-		}
+</div>
+<div class="form-group">
+	<label for="missing_teeth_min">Calculate for missing teeth between:</label>
+	<div class="row">
+		<div class="col-lg-2">
+			<input class="form-control" id="missing_teeth_min" type="number" [(ngModel)]="missingTeethData.teeth_min" (ngModelChange)="changeMissingTeethData()" min="0" max="32">
+		</div>
+		<div class="col-lg-1">and</div>
+		<div class="col-lg-2">
+			<input class="form-control" type="number" [(ngModel)]="missingTeethData.teeth_max" (ngModelChange)="changeMissingTeethData()" min="0" max="32">
+		</div>
 	</div>
 </div>

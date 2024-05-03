@@ -1,11 +1,17 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { InsurancePeriod, InsurancePrice, InsuranceProvider } from './model';
+import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from './model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   providersChanged = new EventEmitter<InsuranceProvider[]>(); 
+
+  private missingTeethData: MissingTeethData = {
+		teeth_min: 2,
+		teeth_max: 15,
+		tooth_price: 1500
+	};
 
   private providers: InsuranceProvider[] = [
     new InsuranceProvider(
@@ -77,5 +83,13 @@ export class DataService {
 
   private onProvidersChanged() {
     this.providersChanged.emit(this.getProviders());
+  }
+
+  public getMissingTeethData(): MissingTeethData {
+    return {...this.missingTeethData};
+  }
+
+  public setMissingTeethData(data: MissingTeethData) {
+    this.missingTeethData = data;
   }
 }

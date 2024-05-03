@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model';
-import { CalculationService } from '../calculation.service';
+import { Component } from '@angular/core';
+import { InsuranceProvider, MissingTeethData } from '../model';
 import { DataService } from '../data.service';
 
 @Component({
@@ -8,33 +7,20 @@ import { DataService } from '../data.service';
 	templateUrl: './providers.component.html',
 	styleUrls: ['./providers.component.css']
 })
-export class ProvidersComponent implements OnInit {
+export class ProvidersComponent {
 	providers: InsuranceProvider[] = [];
 
-	missingTeethData: MissingTeethData = {
-		teeth_min: 2,
-		teeth_max: 15,
-		tooth_price: 1500
-	};
-
-	calculating = false;
-
-	lineChartData: ProviderCalculationResult[] = [];
-	lineChartLabels: string[] = [];
-
-	lineChartType: string = 'line';
+	missingTeethData: MissingTeethData;
 
 	constructor(
-		private calculationService: CalculationService, 
 		private dataService: DataService
 	) {
 		this.providers = dataService.getProviders();
+		this.missingTeethData = dataService.getMissingTeethData();
+
 		dataService.providersChanged.subscribe(
 			(providers: InsuranceProvider[]) => this.providers = providers
 		)
-	}
-
-	ngOnInit() {
 	}
 
 	addProvider() {
@@ -53,20 +39,7 @@ export class ProvidersComponent implements OnInit {
 		this.providers = this.dataService.getProviders();
 	}
 
-	recalculate() {
-		this.calculating = true;
-		this.lineChartData = [];
-		this.lineChartLabels = [];
-		
-		setTimeout(() => {
-			this.lineChartData = this.calculationService.calculate(this.dataService.getProviders(), this.missingTeethData);
-
-			for (let teethCount = this.missingTeethData.teeth_min; teethCount <= this.missingTeethData.teeth_max; teethCount++) {
-				this.lineChartLabels.push(teethCount.toString());
-			}
-
-			this.calculating = false;
-		}, 10);
+	changeMissingTeethData() {
+		this.dataService.setMissingTeethData(this.missingTeethData);
 	}
-
 }

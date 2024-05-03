@@ -7,11 +7,13 @@ import { InsuranceProviderComponent } from './providers/insurance-provider/insur
 
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { CalculateButtonDirective } from './providers/calculate.button.directive';
+import { DiagramComponent } from './diagram/diagram.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CalculateButtonDirective,
+		DiagramComponent,
 		ProvidersComponent,
 		InsuranceProviderComponent
 	],

@@ -1,9 +1,9 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvidersComponent } from './mainview.component';
+import { ProvidersComponent } from './providers.component';
 import { AppModule } from '../app.module';
 
-describe('MainviewComponent', () => {
+describe('ProvidersComponent', () => {
   let component: ProvidersComponent;
   let fixture: ComponentFixture<ProvidersComponent>;
 

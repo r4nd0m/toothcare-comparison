@@ -1,1 +1,21 @@
-<p>diagram works!</p>
+<h2>Results (positive overpaids are bad):</h2>
+<button
+    calculateButtonDirective
+    [calculatingInProgress]="this.calculating" 
+    [inputDataPresent]="providers.length > 0"
+    class="button-calculate btn btn-primary"
+    (click)="recalculate()">
+</button>
+
+@if(lineChartData.length > 0) {
+    <canvas class="diagram" baseChart width="400" height="400"
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="{ responsive: true }"
+        [legend]="true"
+        [type]="'line'"
+    ></canvas>
+}
+@else {
+    <p>Press the button to see the result</p>
+}
