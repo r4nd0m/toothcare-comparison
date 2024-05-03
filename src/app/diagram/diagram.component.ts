@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model';
 import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
@@ -8,7 +8,7 @@ import { DataService } from '../data.service';
   templateUrl: './diagram.component.html',
   styleUrl: './diagram.component.css'
 })
-export class DiagramComponent {
+export class DiagramComponent implements OnInit {
   providers: InsuranceProvider[] = [];
 
   calculating = false;
@@ -23,9 +23,11 @@ export class DiagramComponent {
 		private dataService: DataService
 	) {
 		this.providers = dataService.getProviders();
-
-    this.recalculate();
 	}
+
+  ngOnInit() {
+    this.recalculate();
+  }
   
 	recalculate() {
 		this.calculating = true;
