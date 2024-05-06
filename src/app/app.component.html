@@ -2,8 +2,25 @@
     <div class="row">
         <div class="col">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="nav-item"><a class="nav-link" [ngClass]="{'active': router.url === '/'}" routerLink="/">Input data</a></li>
-                <li role="presentation" class="nav-item"><a class="nav-link" [ngClass]="{'active': router.url === '/diagram'}" routerLink="/diagram">Results</a></li>
+                <li role="presentation" class="nav-item">
+                    <a 
+                        class="nav-link" 
+                        routerLink="/"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}"
+                    >
+                        Input data
+                    </a>
+                </li>
+                <li role="presentation" class="nav-item">
+                    <a 
+                        class="nav-link" 
+                        routerLink="/diagram"
+                        routerLinkActive="active"
+                    >
+                        Results
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
