@@ -9,11 +9,11 @@ describe('DiagramComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ AppModule ],
+      imports: [AppModule],
       declarations: [DiagramComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(DiagramComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

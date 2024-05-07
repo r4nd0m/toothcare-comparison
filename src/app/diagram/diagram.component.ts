@@ -4,38 +4,39 @@ import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
 
 @Component({
-  selector: 'diagram',
-  templateUrl: './diagram.component.html',
-  styleUrl: './diagram.component.css'
+	selector: 'diagram',
+	templateUrl: './diagram.component.html',
+	styleUrl: './diagram.component.css'
 })
 export class DiagramComponent implements OnInit {
-  providers: InsuranceProvider[] = [];
+	providers: InsuranceProvider[] = [];
 
-  calculating = false;
+	calculating = false;
 
-  lineChartData: ProviderCalculationResult[] = [];
-  lineChartLabels: string[] = [];
+	lineChartData: ProviderCalculationResult[] = [];
+	lineChartLabels: string[] = [];
 
-  missingTeethData: MissingTeethData;
+	missingTeethData: MissingTeethData;
 
 	constructor(
-		private calculationService: CalculationService, 
+		private calculationService: CalculationService,
 		private dataService: DataService
 	) {
 		this.providers = dataService.getProviders();
 	}
 
-  ngOnInit() {
-    this.recalculate();
-  }
-  
+	ngOnInit() {
+		this.recalculate();
+	}
+
 	recalculate() {
 		this.calculating = true;
 		this.lineChartData = [];
 		this.lineChartLabels = [];
-		
+
+		// emulate long asynchronous calculation
 		setTimeout(() => {
-      const missingTeethData: MissingTeethData = this.dataService.getMissingTeethData();
+			const missingTeethData: MissingTeethData = this.dataService.getMissingTeethData();
 
 			this.lineChartData = this.calculationService.calculate(this.dataService.getProviders(), missingTeethData);
 

@@ -4,24 +4,24 @@ import { ProvidersComponent } from './providers.component';
 import { AppModule } from '../app.module';
 
 describe('ProvidersComponent', () => {
-  let component: ProvidersComponent;
-  let fixture: ComponentFixture<ProvidersComponent>;
+    let component: ProvidersComponent;
+    let fixture: ComponentFixture<ProvidersComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [ AppModule ],
-      declarations: [ ProvidersComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [AppModule],
+            declarations: [ProvidersComponent]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProvidersComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ProvidersComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
