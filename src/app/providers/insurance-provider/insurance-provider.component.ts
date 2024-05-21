@@ -46,7 +46,7 @@ export class InsuranceProviderComponent implements OnInit {
 		this.updateEmitter.emit(this.insuranceProviderForm.value);
 	}
 
-	// required for iterating over the prices inside of temlate
+	// required for iterating over the prices inside of template
 	get prices() {
 		return (this.insuranceProviderForm.get('prices') as FormArray).controls;
 	}
