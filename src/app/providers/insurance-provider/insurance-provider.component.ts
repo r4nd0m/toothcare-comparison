@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InsuranceProvider, InsurancePrice } from '../../model';
-import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'insurance-provider',
