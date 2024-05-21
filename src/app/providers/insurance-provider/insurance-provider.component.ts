@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { InsuranceProvider } from '../../model';
+import { InsuranceProvider, InsurancePrice } from '../../model';
 import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
@@ -28,13 +28,7 @@ export class InsuranceProviderComponent implements OnInit {
 		this.provider.prices.forEach(
 			(price) => {
 				(<FormArray>this.insuranceProviderForm.get('prices')).push(
-					new FormGroup({
-						'period': new FormGroup({
-							'start': new FormControl(price.period.start),
-							'end': new FormControl(price.period.end),
-						}),
-						'price': new FormControl(price.price),
-					})
+					this.buildPriceFormGroup(price)
 				)
 			}
 		);
@@ -45,15 +39,10 @@ export class InsuranceProviderComponent implements OnInit {
 	}
 
 	addPrice() {
-		const priceGroup = new FormGroup({
-			'period': new FormGroup({
-				'start': new FormControl(null),
-				'end': new FormControl(null),
-			}),
-			'price': new FormControl(null),
-		});
+		const priceFormGroup: FormGroup = this.buildPriceFormGroup();
 
-		(<FormArray>this.insuranceProviderForm.get('prices')).push(priceGroup);
+		(<FormArray>this.insuranceProviderForm.get('prices')).push(priceFormGroup);
+
 		this.updateEmitter.emit(this.insuranceProviderForm.value);
 	}
 
@@ -74,4 +63,13 @@ export class InsuranceProviderComponent implements OnInit {
 		this.updateEmitter.emit(this.insuranceProviderForm.value);
 	}
 
+	private buildPriceFormGroup(price?: InsurancePrice): FormGroup {
+		return new FormGroup({
+			'period': new FormGroup({
+				'start': new FormControl(price?.period.start),
+				'end': new FormControl(price?.period.end),
+			}),
+			'price': new FormControl(price?.price),
+		});
+	}
 }
