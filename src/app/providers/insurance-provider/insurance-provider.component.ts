@@ -9,8 +9,8 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 })
 export class InsuranceProviderComponent implements OnInit {
 	@Input() provider: InsuranceProvider = new InsuranceProvider();
-	@Output('onRemove') removeEmitter = new EventEmitter();
-	@Output('onUpdate') updateEmitter = new EventEmitter();
+	@Output('onRemove') removeEmitter = new EventEmitter<null>();
+	@Output('onUpdate') updateEmitter = new EventEmitter<InsuranceProvider>();
 
 	insuranceProviderForm: FormGroup;
 
@@ -34,7 +34,7 @@ export class InsuranceProviderComponent implements OnInit {
 		);
 
 		this.insuranceProviderForm.valueChanges.subscribe(
-			() => this.updateEmitter.emit(this.insuranceProviderForm.value)
+			() => this.updateEmitter.emit(this.insuranceProviderForm.value as InsuranceProvider)
 		)
 	}
 
