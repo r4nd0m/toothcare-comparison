@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InsuranceProvider } from '../../model';
+import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
 	selector: 'insurance-provider',
@@ -11,16 +12,54 @@ export class InsuranceProviderComponent implements OnInit {
 	@Output('onRemove') removeEmitter = new EventEmitter();
 	@Output('onUpdate') updateEmitter = new EventEmitter();
 
+	insuranceProviderForm: FormGroup;
+
 	element_id = 'insurance_provider_' + Math.random() + Math.random();
 
 	constructor() { }
 
 	ngOnInit() {
+		this.insuranceProviderForm = new FormGroup({
+			'name': new FormControl(this.provider.name),
+			'coverage_part': new FormControl(this.provider.coverage_part),
+			'prices': new FormArray([])
+		});
+
+		this.provider.prices.forEach(
+			(price) => {
+				(<FormArray>this.insuranceProviderForm.get('prices')).push(
+					new FormGroup({
+						'period': new FormGroup({
+							'start': new FormControl(price.period.start),
+							'end': new FormControl(price.period.end),
+						}),
+						'price': new FormControl(price.price),
+					})
+				)
+			}
+		);
+
+		this.insuranceProviderForm.valueChanges.subscribe(
+			() => this.onFormChange()
+		)
 	}
 
 	addPrice() {
-		this.provider.addPrice();
-		this.updateEmitter.emit(null);
+		const priceGroup = new FormGroup({
+			'period': new FormGroup({
+				'start': new FormControl(null),
+				'end': new FormControl(null),
+			}),
+			'price': new FormControl(null),
+		});
+
+		(<FormArray>this.insuranceProviderForm.get('prices')).push(priceGroup);
+		this.updateEmitter.emit(this.insuranceProviderForm.value);
+	}
+
+	// required for iterating over the prices inside of temlate
+	get prices() {
+		return (this.insuranceProviderForm.get('prices') as FormArray).controls;
 	}
 
 	removeProvider() {
@@ -28,12 +67,11 @@ export class InsuranceProviderComponent implements OnInit {
 	}
 
 	removePrice(index: number) {
-		this.provider.prices.splice(index, 1);
-		this.updateEmitter.emit(null);
+		(<FormArray>this.insuranceProviderForm.get('prices')).removeAt(index);
 	}
 
-	onModelChange() {
-		this.updateEmitter.emit(null);
+	onFormChange() {
+		this.updateEmitter.emit(this.insuranceProviderForm.value);
 	}
 
 }

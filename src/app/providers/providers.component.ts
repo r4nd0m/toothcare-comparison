@@ -50,7 +50,6 @@ export class ProvidersComponent {
 	}
 
 	changeMissingTeethData() {
-		console.log(this.missingTeethDataForm.value)
 		this.dataService.setMissingTeethData(this.missingTeethDataForm.value);
 	}
 }
