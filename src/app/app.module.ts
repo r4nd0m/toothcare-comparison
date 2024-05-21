@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { InsuranceProviderComponent } from './providers/insurance-provider/insurance-provider.component';
@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 		BaseChartDirective,
 		BrowserModule,
 		FormsModule,
+		ReactiveFormsModule,
 		AppRoutingModule
 	],
 	providers: [provideCharts(withDefaultRegisterables())],
