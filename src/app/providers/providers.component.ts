@@ -28,8 +28,8 @@ export class ProvidersComponent {
 			(providers: InsuranceProvider[]) => this.providers = providers
 		)
 		
-		this.missingTeethDataForm.valueChanges.subscribe(
-			() => this.changeMissingTeethData()
+		this.missingTeethDataForm.valueChanges.subscribe( 
+			() => this.dataService.setMissingTeethData(this.missingTeethDataForm.value)
 		)
 	}
 
@@ -45,11 +45,4 @@ export class ProvidersComponent {
 		this.dataService.removeProvider(index);
 	}
 
-	changeProviders() {
-		this.providers = this.dataService.getProviders();
-	}
-
-	changeMissingTeethData() {
-		this.dataService.setMissingTeethData(this.missingTeethDataForm.value);
-	}
 }

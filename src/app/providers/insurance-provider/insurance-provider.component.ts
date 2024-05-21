@@ -34,7 +34,7 @@ export class InsuranceProviderComponent implements OnInit {
 		);
 
 		this.insuranceProviderForm.valueChanges.subscribe(
-			() => this.onFormChange()
+			() => this.updateEmitter.emit(this.insuranceProviderForm.value)
 		)
 	}
 
@@ -57,10 +57,6 @@ export class InsuranceProviderComponent implements OnInit {
 
 	removePrice(index: number) {
 		(<FormArray>this.insuranceProviderForm.get('prices')).removeAt(index);
-	}
-
-	onFormChange() {
-		this.updateEmitter.emit(this.insuranceProviderForm.value);
 	}
 
 	private buildPriceFormGroup(price?: InsurancePrice): FormGroup {
