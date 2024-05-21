@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { InsuranceProvider, MissingTeethData } from '../model';
 import { DataService } from '../data.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'providers',
@@ -9,17 +10,26 @@ import { DataService } from '../data.service';
 })
 export class ProvidersComponent {
 	providers: InsuranceProvider[] = [];
-
-	missingTeethData: MissingTeethData;
+	missingTeethDataForm: FormGroup;
 
 	constructor(
 		private dataService: DataService
 	) {
 		this.providers = dataService.getProviders();
-		this.missingTeethData = dataService.getMissingTeethData();
+
+		const missingTeethData = dataService.getMissingTeethData();
+		this.missingTeethDataForm = new FormGroup({
+			'teeth_min': new FormControl(missingTeethData.teeth_min),
+			'teeth_max': new FormControl(missingTeethData.teeth_max),
+			'tooth_price': new FormControl(missingTeethData.tooth_price)
+		});
 
 		dataService.providersChanged.subscribe(
 			(providers: InsuranceProvider[]) => this.providers = providers
+		)
+		
+		this.missingTeethDataForm.valueChanges.subscribe(
+			() => this.changeMissingTeethData()
 		)
 	}
 
@@ -40,6 +50,6 @@ export class ProvidersComponent {
 	}
 
 	changeMissingTeethData() {
-		this.dataService.setMissingTeethData(this.missingTeethData);
+		this.dataService.setMissingTeethData(this.missingTeethDataForm.value);
 	}
 }

@@ -1,7 +1,7 @@
 <h2>Providers:</h2>
 <div class="form-group">
 	@for (provider of providers; track provider.name) {
-		<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)" (onUpdate)="updateProvider($index, provider)"></insurance-provider>
+		<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)" (onUpdate)="updateProvider($index, $event)"></insurance-provider>
 	}
 	
 	@if ( providers.length === 0 ) {
@@ -10,27 +10,51 @@
 
 	<button class="button-add-provider row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
 </div>
+
 <h2>Additional parameters:</h2>
-<div class="form-group">
-	<label for="missing_tooth_price">Missing tooth recovery price:</label>
-	<div class="row">
-		<div class="col-lg-2">
-			<input class="form-control" id="missing_tooth_price" type="number" step="0.1" [(ngModel)]="missingTeethData.tooth_price" (ngModelChange)="changeMissingTeethData()">
+
+<form [formGroup]="missingTeethDataForm">
+	<div class="form-group">
+		<label for="missing_tooth_price">Missing tooth recovery price:</label>
+		<div class="row">
+			<div class="col-lg-2">
+				<input 
+					class="form-control" 
+					id="missing_tooth_price" 
+					type="number" 
+					step="100"
+					formControlName="tooth_price"
+				>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="form-group">
-	<label for="missing_teeth_min">Calculate for missing teeth between:</label>
-	<div class="row">
-		<div class="col-lg-2">
-			<input class="form-control" id="missing_teeth_min" type="number" [(ngModel)]="missingTeethData.teeth_min" (ngModelChange)="changeMissingTeethData()" min="0" max="32">
-		</div>
-		<div class="col-lg-1">and</div>
-		<div class="col-lg-2">
-			<input class="form-control" type="number" [(ngModel)]="missingTeethData.teeth_max" (ngModelChange)="changeMissingTeethData()" min="0" max="32">
+	<div class="form-group">
+		<label for="missing_teeth_min">Calculate for missing teeth between:</label>
+		<div class="row">
+			<div class="col-lg-2">
+				<input 
+					class="form-control" 
+					id="missing_teeth_min" 
+					type="number"
+					min="0" 
+					max="32"
+					formControlName="teeth_min"
+				>
+			</div>
+			<div class="col-lg-1">and</div>
+			<div class="col-lg-2">
+				<input 
+					class="form-control" 
+					id="missing_teeth_max" 
+					type="number"
+					min="0" 
+					max="32"
+					formControlName="teeth_max"
+				>
+			</div>
 		</div>
 	</div>
-</div>
+</form>
 
 <div class="row">
 	<div class="col">
