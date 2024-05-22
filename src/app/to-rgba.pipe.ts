@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ToRgbaPipe implements PipeTransform {
 
-    transform(colors: [number, number, number], ...args: [number?]): string {
-        let normalizedAlpha: number = args[0] || 1;
+    transform(colors: [number, number, number], alpha?: number): string {
+        let normalizedAlpha: number = alpha === undefined ? 1 : alpha;
 
         if (normalizedAlpha < 0) normalizedAlpha = 0;
         if (normalizedAlpha > 1) normalizedAlpha = 1;
