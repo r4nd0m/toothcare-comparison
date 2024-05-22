@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { ProviderCalculationResultItem, InsuranceProvider, MissingTeethData, ProviderCalculationResult } from './model.js';
+import { ToRgbaPipe } from './to-rgba.pipe';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CalculationService {
 
-	constructor() { }
+	constructor(private toRgbaPipe: ToRgbaPipe) { }
 
 	public calculate(providers: InsuranceProvider[], missingTeethData: MissingTeethData): ProviderCalculationResult[] {
 		const lineChartData: ProviderCalculationResult[] = [];
 
 		providers.forEach((provider) => {
 
-			let random_color_rgb = this.getRandomColorRGB();
+			let randomColorRgb: string = this.toRgbaPipe.transform(this.getRandomColorsRGB(), 1);
 
 			let result: ProviderCalculationResult = {
 				label: provider.name,
 				data: [],
-				backgroundColor: 'rgba(' + random_color_rgb + ',1)',
-				borderColor: 'rgba(' + random_color_rgb + ',1)'
+				backgroundColor: randomColorRgb,
+				borderColor: randomColorRgb
 			};
 
 			for (let teeth_count = missingTeethData.teeth_min; teeth_count <= missingTeethData.teeth_max; teeth_count++) {
@@ -66,11 +67,11 @@ export class CalculationService {
 	}
 
 
-	private getRandomColorRGB(): string {
+	private getRandomColorsRGB(): [number, number, number] {
 		return [
 			Math.floor(Math.random() * 255),
 			Math.floor(Math.random() * 228),
 			Math.floor(Math.random() * 228)
-		].join(',');
+		];
 	}
 }

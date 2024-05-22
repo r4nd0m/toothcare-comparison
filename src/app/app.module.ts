@@ -9,6 +9,7 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 import { CalculateButtonDirective } from './providers/calculate.button.directive';
 import { DiagramComponent } from './diagram/diagram.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ToRgbaPipe } from './to-rgba.pipe';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
 		ReactiveFormsModule,
 		AppRoutingModule
 	],
-	providers: [provideCharts(withDefaultRegisterables())],
+	providers: [provideCharts(withDefaultRegisterables()), ToRgbaPipe],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
