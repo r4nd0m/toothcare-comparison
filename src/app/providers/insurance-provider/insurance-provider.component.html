@@ -1,4 +1,4 @@
-<form [formGroup]="insuranceProviderForm">
+<form [formGroup]="insuranceProviderForm" class="py-2 mb-4 shadow rounded">
 	<div class="form-group" >
 		<label class="row col" for="{{this.element_id}}_provider_name">Name:</label>
 		<div class="row">
@@ -29,15 +29,15 @@
 		</div>
 	</div>
 
-	<div class="form-group" formArrayName="prices">
-		<label class="row col">Prices:</label>
+	<div class="form-group col-6" formArrayName="prices">
+		<label>Prices:</label>
 		
 		@for (price of provider.prices; track $index) {
-			<div [formGroupName]="$index" class="row row-provider-price">
-				<div class="col mt-2">
+			<div [formGroupName]="$index" class="row row-provider-price mt-2">
+				<div class="col mx-0 mt-2">
 					Age
 				</div>
-				<div class="col mt-2" formGroupName="period">
+				<div class="col mx-0" formGroupName="period">
 					<input 
 						class="form-control" 
 						name="period_start" 
@@ -48,10 +48,10 @@
 						formControlName="start"
 					>
 				</div>
-				<div class="col mt-2">
+				<div class="col mx-0 px-0 mt-2">
 					- 
 				</div>
-				<div class="col mt-2" formGroupName="period">
+				<div class="col mx-0" formGroupName="period">
 					<input 
 						class="form-control" 
 						name="period_end"
@@ -62,10 +62,10 @@
 						formControlName="end"
 					>
 				</div>
-				<div class="col mt-2">
+				<div class="col mx-0 px-0 mt-2">
 					:
 				</div>
-				<div class="col mt-2">
+				<div class="col mx-0">
 					<input 
 						class="form-control" 
 						name="period_price" 
@@ -77,7 +77,7 @@
 						formControlName="price"
 					>
 				</div>
-				<div class="col mt-2">
+				<div class="col mx-0">
 					<button class="button-remove-price btn btn-outline-danger" (click)="removePrice($index)">remove</button>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 		}
 		
 		<div class="row">
-			<div class="col btn-toolbar m-2" role="toolbar">
+			<div class="btn-toolbar mt-2" role="toolbar">
 				<button class="button-add-price btn btn-outline-primary float-right" (click)="addPrice()">add price</button>
 			</div>
 		</div>
