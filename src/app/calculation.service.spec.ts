@@ -8,7 +8,7 @@ describe('CalculationService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [ToRgbaPipe]
+            providers: [ToRgbaPipe, CalculationService]
         });
         service = TestBed.inject(CalculationService);
     });

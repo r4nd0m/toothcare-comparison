@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { ProviderCalculationResultItem, InsuranceProvider, MissingTeethData, ProviderCalculationResult } from './model.js';
 import { ToRgbaPipe } from './to-rgba.pipe';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class CalculationService {
+	private toRgbaPipe: ToRgbaPipe = new ToRgbaPipe();
 
-	constructor(private toRgbaPipe: ToRgbaPipe) { }
+	constructor() {	}
 
 	public calculate(providers: InsuranceProvider[], missingTeethData: MissingTeethData): ProviderCalculationResult[] {
 		const lineChartData: ProviderCalculationResult[] = [];

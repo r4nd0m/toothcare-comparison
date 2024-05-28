@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InsuranceProvider, InsurancePrice } from '../../model';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
+	standalone: true,
+	imports: [ReactiveFormsModule],
 	selector: 'insurance-provider',
 	templateUrl: './insurance-provider.component.html',
 	styleUrls: ['./insurance-provider.component.css']
