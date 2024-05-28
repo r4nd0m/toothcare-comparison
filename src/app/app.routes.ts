@@ -1,9 +1,19 @@
-import { ProvidersComponent } from './providers/providers.component';
-import { DiagramComponent } from './diagram/diagram.component';
 import { Routes } from '@angular/router';
 
 export const appRoutes: Routes = [
-	{ path: '', component: ProvidersComponent },
-	{ path: 'diagram', component: DiagramComponent },
+	{
+		path: '', 
+		loadComponent: () =>
+			import ('./providers/providers.component').then(
+				(mod) => mod.ProvidersComponent
+			) 
+	},
+	{ 
+		path: 'diagram', 
+		loadComponent: () => 
+			import ('./diagram/diagram.component').then(
+				(mod) => mod.DiagramComponent
+			)
+	},
 	{ path: '**', redirectTo: '' }
 ];
