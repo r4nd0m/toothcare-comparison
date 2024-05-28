@@ -1,3 +1,5 @@
+import { cy, it } from 'local-cypress'
+
 describe('Test calculation diagram', () => {
   it('Opens the application and checks if the calculation is working', () => {
     cy.visit('http://localhost:4200/diagram');

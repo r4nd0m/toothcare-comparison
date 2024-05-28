@@ -1,3 +1,5 @@
+import { cy, it } from 'local-cypress'
+
 describe('Test provider management', () => {
   it('Opens the application and checks if the providers adding/removing is working', () => {
     cy.visit('http://localhost:4200/');
