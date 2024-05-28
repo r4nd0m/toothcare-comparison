@@ -2,8 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model';
 import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
+import { CalculateButtonDirective } from '../providers/calculate.button.directive';
+import { ToRgbaPipe } from '../to-rgba.pipe';
+
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @Component({
+	standalone: true,
+	imports: [
+		BaseChartDirective,
+		CalculateButtonDirective
+	],
+	providers: [provideCharts(withDefaultRegisterables()), ToRgbaPipe],
 	selector: 'diagram',
 	templateUrl: './diagram.component.html',
 	styleUrl: './diagram.component.css'

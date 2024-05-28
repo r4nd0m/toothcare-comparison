@@ -1,6 +1,7 @@
 import { Directive, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
 
 @Directive({
+    standalone: true,
     selector: '[calculateButtonDirective]'
 })
 export class CalculateButtonDirective implements OnInit, OnChanges {
