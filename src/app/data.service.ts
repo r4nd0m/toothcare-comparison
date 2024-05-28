@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from './model';
 import { Subject } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class DataService {
     providersChanged = new Subject<InsuranceProvider[]>();
 

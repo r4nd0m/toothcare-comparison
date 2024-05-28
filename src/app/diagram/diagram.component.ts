@@ -11,9 +11,10 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 	standalone: true,
 	imports: [
 		BaseChartDirective,
-		CalculateButtonDirective
+		CalculateButtonDirective,
+		ToRgbaPipe
 	],
-	providers: [provideCharts(withDefaultRegisterables()), ToRgbaPipe],
+	providers: [provideCharts(withDefaultRegisterables())],
 	selector: 'diagram',
 	templateUrl: './diagram.component.html',
 	styleUrl: './diagram.component.css'

@@ -2,6 +2,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProvidersComponent } from './providers.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataService } from '../data.service';
 
 describe('ProvidersComponent', () => {
     let component: ProvidersComponent;
@@ -9,7 +10,8 @@ describe('ProvidersComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule]
+            imports: [ReactiveFormsModule],
+            providers: [DataService]
         })
             .compileComponents();
     }));

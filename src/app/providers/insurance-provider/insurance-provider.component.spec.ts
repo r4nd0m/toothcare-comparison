@@ -1,7 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InsuranceProviderComponent } from './insurance-provider.component';
-import { AppModule } from '../../app.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('InsuranceProviderComponent', () => {
