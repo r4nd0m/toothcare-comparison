@@ -1,13 +1,16 @@
 import { Component, OnDestroy } from '@angular/core';
 import { InsuranceProvider, MissingTeethData } from '../model';
 import { DataService } from '../data.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
 @Component({
+	standalone: true,
+	imports: [InsuranceProviderComponent, ReactiveFormsModule],
 	selector: 'providers',
 	templateUrl: './providers.component.html',
-	styleUrls: ['./providers.component.css']
+	styleUrls: ['./providers.component.css'],
 })
 export class ProvidersComponent implements OnDestroy{
 	providers: InsuranceProvider[] = [];
