@@ -7,8 +7,8 @@ import { Directive, HostBinding, Input, OnChanges, OnInit } from '@angular/core'
 export class CalculateButtonDirective implements OnInit, OnChanges {
     @HostBinding('textContent') buttonText: string;
     @HostBinding('disabled') buttonDisabled: boolean;
-    @Input('inputDataPresent') inputDataPresent: boolean;
-    @Input('calculatingInProgress') calculatingInProgress: boolean;
+    @Input({required: true}) inputDataPresent: boolean;
+    @Input({required: true}) calculatingInProgress: boolean;
 
     constructor() { }
 

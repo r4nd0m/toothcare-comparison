@@ -10,7 +10,7 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 	styleUrls: ['./insurance-provider.component.css']
 })
 export class InsuranceProviderComponent implements OnInit {
-	@Input() provider!: InsuranceProvider;
+	@Input({required: true}) provider!: InsuranceProvider;
 	@Output('onRemove') removeEmitter = new EventEmitter<null>();
 	@Output('onUpdate') updateEmitter = new EventEmitter<InsuranceProvider>();
 
