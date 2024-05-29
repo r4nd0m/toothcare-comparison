@@ -1,6 +1,6 @@
 <h2>Providers:</h2>
 <div class="form-group">
-	@for (provider of providers; track provider.name) {
+	@for (provider of providers; track $index) {
 		<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)" (onUpdate)="updateProvider($index, $event)"></insurance-provider>
 	}
 	
