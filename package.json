@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
-    "build": "ng build --base-href /toothcare-comparison/",
+    "start": "ng serve --open --configuration development",
+    "build": "ng build --base-href /toothcare-comparison/ --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:watch": "jest --watch",
