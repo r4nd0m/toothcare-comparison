@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { InsuranceProvider, MissingTeethData } from '../model';
 import { DataService } from '../data.service';
@@ -7,7 +8,7 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
 
 @Component({
 	standalone: true,
-	imports: [InsuranceProviderComponent, ReactiveFormsModule],
+	imports: [InsuranceProviderComponent, ReactiveFormsModule, CommonModule],
 	selector: 'providers',
 	templateUrl: './providers.component.html',
 	styleUrls: ['./providers.component.css'],

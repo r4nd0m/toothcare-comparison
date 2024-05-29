@@ -1,8 +1,11 @@
 <h2>Providers:</h2>
 <div class="form-group">
-	@for (provider of providers; track $index) {
-		<insurance-provider [provider]="provider" (onRemove)="removeProvider($index)" (onUpdate)="updateProvider($index, $event)"></insurance-provider>
-	}
+	<insurance-provider
+		*ngFor="let provider of this.providers; index as index"
+		[provider]="provider"
+		(onRemove)="removeProvider(index)"
+		(onUpdate)="updateProvider(index, $event)"
+	></insurance-provider>
 	
 	@if ( providers.length === 0 ) {
 		<span class="message-no-providers">No providers selected</span>

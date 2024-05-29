@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, input, Output, EventEmitter } from '@angular/core';
 import { InsuranceProvider, InsurancePrice } from '../../model';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -10,7 +10,8 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 	styleUrls: ['./insurance-provider.component.css']
 })
 export class InsuranceProviderComponent implements OnInit {
-	@Input({required: true}) provider!: InsuranceProvider;
+	provider = input.required<InsuranceProvider>();
+
 	@Output('onRemove') removeEmitter = new EventEmitter<null>();
 	@Output('onUpdate') updateEmitter = new EventEmitter<InsuranceProvider>();
 
@@ -22,12 +23,12 @@ export class InsuranceProviderComponent implements OnInit {
 
 	ngOnInit() {
 		this.insuranceProviderForm = new FormGroup({
-			'name': new FormControl(this.provider.name),
-			'coverage_part': new FormControl(this.provider.coverage_part),
+			'name': new FormControl(this.provider().name),
+			'coverage_part': new FormControl(this.provider().coverage_part),
 			'prices': new FormArray([])
 		});
 
-		this.provider.prices.forEach(
+		this.provider().prices.forEach(
 			(price) => {
 				(<FormArray>this.insuranceProviderForm.get('prices')).push(
 					this.buildPriceFormGroup(price)
