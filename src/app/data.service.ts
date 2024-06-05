@@ -3,7 +3,7 @@ import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } 
 
 @Injectable()
 export class DataService {
-    private dummyProviders: InsuranceProvider[] = localStorage.getItem('insuranceProviders') ? JSON.parse(localStorage.getItem('insuranceProviders')) : [
+    private loadedProviders: InsuranceProvider[] = localStorage.getItem('insuranceProviders') ? JSON.parse(localStorage.getItem('insuranceProviders')) : [
         new InsuranceProvider(
             "AOK Premium",
             [
@@ -51,15 +51,15 @@ export class DataService {
         )
     ];
 
-    providers: WritableSignal<InsuranceProvider[]> = signal<InsuranceProvider[]>(this.dummyProviders);
+    providers: WritableSignal<InsuranceProvider[]> = signal<InsuranceProvider[]>(this.loadedProviders);
 
-    private dummyMissingTeethData = localStorage.getItem('missingTeethData') ? JSON.parse(localStorage.getItem('missingTeethData')) : {
+    private loadedMissingTeethData = localStorage.getItem('missingTeethData') ? JSON.parse(localStorage.getItem('missingTeethData')) : {
         teeth_min: 2,
         teeth_max: 15,
         tooth_price: 1500
     };
 
-    private missingTeethData: WritableSignal<MissingTeethData> = signal<MissingTeethData>(this.dummyMissingTeethData);
+    private missingTeethData: WritableSignal<MissingTeethData> = signal<MissingTeethData>(this.loadedMissingTeethData);
 
     public getProviders(): InsuranceProvider[] {
         return this.providers();
