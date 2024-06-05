@@ -32,7 +32,7 @@
 	<div class="form-group col-md-12" formArrayName="prices">
 		<label>Prices:</label>
 		
-		@for (price of provider.prices; track $index) {
+		@for (price of provider().prices; track $index) {
 			<div [formGroupName]="$index" class="row row-provider-price mt-2">
 				<div class="mx-0 mt-2">
 					Age
@@ -83,7 +83,7 @@
 			</div>
 		}
 
-		@if (provider.prices.length === 0) {
+		@if (provider().prices.length === 0) {
 			<div class="row">no prices added</div>
 		}
 		

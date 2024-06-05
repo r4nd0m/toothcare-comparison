@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model';
 import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
@@ -27,13 +27,14 @@ export class DiagramComponent implements OnInit {
 	lineChartData: ProviderCalculationResult[] = [];
 	lineChartLabels: string[] = [];
 
-	missingTeethData: MissingTeethData;
+	missingTeethDataSignal: Signal<MissingTeethData>;
 
 	constructor(
 		private calculationService: CalculationService,
 		private dataService: DataService
 	) {
 		this.providers = dataService.getProviders();
+		this.missingTeethDataSignal = this.dataService.getMissingTeethDataSignal();
 	}
 
 	ngOnInit() {
@@ -47,7 +48,7 @@ export class DiagramComponent implements OnInit {
 
 		// emulate long asynchronous calculation
 		setTimeout(() => {
-			const missingTeethData: MissingTeethData = this.dataService.getMissingTeethData();
+			const missingTeethData: MissingTeethData = this.missingTeethDataSignal();
 
 			this.lineChartData = this.calculationService.calculate(this.dataService.getProviders(), missingTeethData);
 
