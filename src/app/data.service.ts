@@ -71,7 +71,7 @@ export class DataService {
     }
 
     public updateProvider(index: number, provider: InsuranceProvider) {
-        this.providers[index] = provider;
+        this.providers[index] = Object.assign(this.providers[index], provider);
         this.onProvidersChanged();
     }
 
