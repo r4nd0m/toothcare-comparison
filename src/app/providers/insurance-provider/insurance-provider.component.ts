@@ -1,4 +1,4 @@
-import { Component, OnInit, input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, input, output } from '@angular/core';
 import { InsuranceProvider, InsurancePrice } from '../../model';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -12,8 +12,12 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 export class InsuranceProviderComponent implements OnInit {
 	provider = input.required<InsuranceProvider>();
 
-	@Output('onRemove') removeEmitter = new EventEmitter<null>();
-	@Output('onUpdate') updateEmitter = new EventEmitter<InsuranceProvider>();
+	removeEmitter = output<null>({
+		alias: "onRemove",
+	});
+	updateEmitter = output<InsuranceProvider>({
+		alias: "onUpdate",
+	});
 
 	insuranceProviderForm: FormGroup;
 
