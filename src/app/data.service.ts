@@ -4,15 +4,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class DataService {
-    providersChanged = new Subject<InsuranceProvider[]>();
-
-    private missingTeethData: WritableSignal<MissingTeethData> = signal<MissingTeethData>({
-        teeth_min: 2,
-        teeth_max: 15,
-        tooth_price: 1500
-    });
-
-    private providers: InsuranceProvider[] = [
+    private dummyProviders: InsuranceProvider[] = [
         new InsuranceProvider(
             "AOK Premium",
             [
@@ -57,31 +49,47 @@ export class DataService {
                 new InsurancePrice(new InsurancePeriod(50, 59), 54.4)
             ],
             100
-        )];
+        )
+    ];
 
+    providers: WritableSignal<InsuranceProvider[]> = signal<InsuranceProvider[]>(this.dummyProviders);
+
+    private missingTeethData: WritableSignal<MissingTeethData> = signal<MissingTeethData>({
+        teeth_min: 2,
+        teeth_max: 15,
+        tooth_price: 1500
+    });
+
+    
     constructor() { }
 
     public getProviders(): InsuranceProvider[] {
-        return this.providers.slice();
+        return this.providers();
+    }
+
+    public getProvidersSignal(): Signal<InsuranceProvider[]> {
+        return this.providers.asReadonly();
     }
 
     public addNewProvider() {
-        this.providers.push(new InsuranceProvider());
-        this.providersChanged.next(this.getProviders());
+        this.providers.update((providers: InsuranceProvider[]) => {
+            providers.push(new InsuranceProvider());
+            return providers;
+        })
     }
 
     public updateProvider(index: number, provider: InsuranceProvider) {
-        this.providers[index] = Object.assign(this.providers[index], provider);
-        this.onProvidersChanged();
+        this.providers.update((providers: InsuranceProvider[]) => {
+            providers[index] = Object.assign(providers[index], provider);
+            return providers;
+        })
     }
 
     public removeProvider(index: number) {
-        this.providers.splice(index, 1);
-        this.onProvidersChanged();
-    }
-
-    private onProvidersChanged() {
-        this.providersChanged.next(this.getProviders());
+        this.providers.update((providers: InsuranceProvider[]) => {
+            providers.splice(index, 1);
+            return providers;
+        })
     }
 
     public getMissingTeethDataSignal(): Signal<MissingTeethData> {
