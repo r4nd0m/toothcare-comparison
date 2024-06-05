@@ -3,7 +3,7 @@ import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } 
 
 @Injectable()
 export class DataService {
-    private dummyProviders: InsuranceProvider[] = [
+    private dummyProviders: InsuranceProvider[] = localStorage.getItem('insuranceProviders') ? JSON.parse(localStorage.getItem('insuranceProviders')) : [
         new InsuranceProvider(
             "AOK Premium",
             [
@@ -53,11 +53,13 @@ export class DataService {
 
     providers: WritableSignal<InsuranceProvider[]> = signal<InsuranceProvider[]>(this.dummyProviders);
 
-    private missingTeethData: WritableSignal<MissingTeethData> = signal<MissingTeethData>({
+    private dummyMissingTeethData = localStorage.getItem('missingTeethData') ? JSON.parse(localStorage.getItem('missingTeethData')) : {
         teeth_min: 2,
         teeth_max: 15,
         tooth_price: 1500
-    });
+    };
+
+    private missingTeethData: WritableSignal<MissingTeethData> = signal<MissingTeethData>(this.dummyMissingTeethData);
 
     public getProviders(): InsuranceProvider[] {
         return this.providers();
@@ -71,21 +73,27 @@ export class DataService {
         this.providers.update((providers: InsuranceProvider[]) => {
             providers.push(new InsuranceProvider());
             return providers;
-        })
+        });
+
+        this.saveProviders();
     }
 
     public updateProvider(index: number, provider: InsuranceProvider) {
         this.providers.update((providers: InsuranceProvider[]) => {
             providers[index] = Object.assign(providers[index], provider);
             return providers;
-        })
+        });
+
+        this.saveProviders();
     }
 
     public removeProvider(index: number) {
         this.providers.update((providers: InsuranceProvider[]) => {
             providers.splice(index, 1);
             return providers;
-        })
+        });
+
+        this.saveProviders();
     }
 
     public getMissingTeethDataSignal(): Signal<MissingTeethData> {
@@ -98,5 +106,14 @@ export class DataService {
 
     public setMissingTeethData(data: MissingTeethData) {
         this.missingTeethData.set(data);
+        this.saveMissingTeethData();
+    }
+
+    private saveProviders() {
+        localStorage.setItem('insuranceProviders', JSON.stringify(this.providers()));
+    }
+
+    private saveMissingTeethData() {
+        localStorage.setItem('missingTeethData', JSON.stringify(this.missingTeethData()));
     }
 }
