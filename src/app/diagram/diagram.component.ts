@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal, inject } from '@angular/core';
+import { Component, OnInit, Signal, inject, signal } from '@angular/core';
 import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model';
 import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
@@ -20,21 +20,21 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 	styleUrl: './diagram.component.css'
 })
 export class DiagramComponent implements OnInit {
-	providers: InsuranceProvider[] = [];
-
-	calculating = false;
-
-	lineChartData: ProviderCalculationResult[] = [];
-	lineChartLabels: string[] = [];
-
+	providersSignal: Signal<InsuranceProvider[]>;
 	missingTeethDataSignal: Signal<MissingTeethData>;
+
+	calculatingSignal = signal<boolean>(false);
+
+	lineChartDataSignal = signal<ProviderCalculationResult[]>([]);
+	lineChartLabelsSignal = signal<string[]>([]);
+
 
 	private calculationService = inject(CalculationService);
 	private dataService = inject(DataService);
 
 
 	constructor() {
-		this.providers = this.dataService.getProviders();
+		this.providersSignal = this.dataService.getProvidersSignal();
 		this.missingTeethDataSignal = this.dataService.getMissingTeethDataSignal();
 	}
 
@@ -43,21 +43,22 @@ export class DiagramComponent implements OnInit {
 	}
 
 	recalculate() {
-		this.calculating = true;
-		this.lineChartData = [];
-		this.lineChartLabels = [];
+		this.calculatingSignal.set(true);
+		let lineChartLabels: string[] = [];
 
 		// emulate long asynchronous calculation
 		setTimeout(() => {
 			const missingTeethData: MissingTeethData = this.missingTeethDataSignal();
 
-			this.lineChartData = this.calculationService.calculate(this.dataService.getProviders(), missingTeethData);
 
 			for (let teethCount = missingTeethData.teeth_min; teethCount <= missingTeethData.teeth_max; teethCount++) {
-				this.lineChartLabels.push(teethCount.toString());
+				lineChartLabels.push(teethCount.toString());
 			}
 
-			this.calculating = false;
+			this.lineChartDataSignal.set(this.calculationService.calculate(this.dataService.getProviders(), missingTeethData));
+			this.lineChartLabelsSignal.set(lineChartLabels);
+
+			this.calculatingSignal.set(false);
 		}, 10);
 	}
 }

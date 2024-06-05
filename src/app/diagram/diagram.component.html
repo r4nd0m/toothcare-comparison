@@ -1,16 +1,16 @@
 <h2>Results (positive overpaids are bad):</h2>
 <button
     calculateButton
-    [calculatingInProgress]="this.calculating" 
-    [inputDataPresent]="providers.length > 0"
+    [calculatingInProgress]="this.calculatingSignal()" 
+    [inputDataPresent]="providersSignal().length > 0"
     class="button-calculate btn btn-primary"
     (click)="recalculate()">
 </button>
 
-@if(lineChartData.length > 0) {
+@if(lineChartDataSignal().length > 0) {
     <canvas class="diagram" baseChart width="400" height="400"
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
+        [datasets]="lineChartDataSignal()"
+        [labels]="lineChartLabelsSignal()"
         [options]="{ responsive: true }"
         [legend]="true"
         [type]="'line'"

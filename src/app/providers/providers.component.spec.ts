@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataService } from '../data.service';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
@@ -9,8 +9,8 @@ describe('ProvidersComponent', () => {
     let component: ProvidersComponent;
     let fixture: ComponentFixture<ProvidersComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [
                 RouterModule.forRoot([]), 
                 RouterOutlet, 
@@ -19,7 +19,7 @@ describe('ProvidersComponent', () => {
             ],
             providers: [DataService]
         }).compileComponents();
-    }));
+    });
 
 
 

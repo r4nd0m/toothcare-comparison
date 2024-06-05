@@ -6,7 +6,7 @@ import { importProvidersFrom } from '@angular/core';
 import { CalculationService } from './app/calculation.service';
 import { DataService } from './app/data.service';
 
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, ɵprovideZonelessChangeDetection } from '@angular/core';
 import { environment } from './environments/environment';
 
 if (environment.production) {
@@ -18,7 +18,8 @@ bootstrapApplication(
         providers: [
             importProvidersFrom(RouterModule.forRoot(appRoutes)),
             CalculationService,
-            DataService
+            DataService,
+            ɵprovideZonelessChangeDetection()
         ]
     }
 );
