@@ -1,4 +1,4 @@
-import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from './model';
 import { Subject } from 'rxjs';
 
@@ -85,7 +85,7 @@ export class DataService {
     }
 
     public getMissingTeethDataSignal(): Signal<MissingTeethData> {
-        return this.missingTeethData;
+        return computed(() => this.missingTeethData());
     }
 
     public getMissingTeethData(): MissingTeethData {
