@@ -6,8 +6,6 @@ import { ToRgbaPipe } from './to-rgba.pipe';
 export class CalculationService {
 	private toRgbaPipe: ToRgbaPipe = new ToRgbaPipe();
 
-	constructor() {	}
-
 	public calculate(providers: InsuranceProvider[], missingTeethData: MissingTeethData): ProviderCalculationResult[] {
 		const lineChartData: ProviderCalculationResult[] = [];
 

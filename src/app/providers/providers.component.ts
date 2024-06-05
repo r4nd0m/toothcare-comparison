@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Signal } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { InsuranceProvider, MissingTeethData } from '../model';
 import { DataService } from '../data.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -17,12 +17,12 @@ export class ProvidersComponent {
 	providers: Signal<InsuranceProvider[]>;
 	missingTeethDataForm: FormGroup;
 
-	constructor(
-		private dataService: DataService
-	) {
-		this.providers = dataService.getProvidersSignal();
+	private dataService = inject(DataService);
 
-		const missingTeethData: MissingTeethData = dataService.getMissingTeethData();
+	constructor() {
+		this.providers = this.dataService.getProvidersSignal();
+
+		const missingTeethData: MissingTeethData = this.dataService.getMissingTeethData();
 		
 		this.missingTeethDataForm = new FormGroup({
 			'teeth_min': new FormControl(missingTeethData.teeth_min),

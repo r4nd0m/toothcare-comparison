@@ -23,8 +23,6 @@ export class InsuranceProviderComponent implements OnInit {
 
 	element_id = 'insurance_provider_' + Math.random() + Math.random();
 
-	constructor() { }
-
 	ngOnInit() {
 		this.insuranceProviderForm = new FormGroup({
 			'name': new FormControl(this.provider().name),

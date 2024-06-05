@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, OnInit, Signal, inject } from '@angular/core';
 import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model';
 import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
@@ -29,11 +29,12 @@ export class DiagramComponent implements OnInit {
 
 	missingTeethDataSignal: Signal<MissingTeethData>;
 
-	constructor(
-		private calculationService: CalculationService,
-		private dataService: DataService
-	) {
-		this.providers = dataService.getProviders();
+	private calculationService = inject(CalculationService);
+	private dataService = inject(DataService);
+
+
+	constructor() {
+		this.providers = this.dataService.getProviders();
 		this.missingTeethDataSignal = this.dataService.getMissingTeethDataSignal();
 	}
 

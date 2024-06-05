@@ -1,6 +1,5 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from './model';
-import { Subject } from 'rxjs';
 
 @Injectable()
 export class DataService {
@@ -59,9 +58,6 @@ export class DataService {
         teeth_max: 15,
         tooth_price: 1500
     });
-
-    
-    constructor() { }
 
     public getProviders(): InsuranceProvider[] {
         return this.providers();

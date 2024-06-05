@@ -10,8 +10,6 @@ export class CalculateButtonDirective implements OnInit, OnChanges {
     @Input({required: true}) inputDataPresent: boolean;
     @Input({required: true}) calculatingInProgress: boolean;
 
-    constructor() { }
-
     ngOnInit() {
         this.buttonText = 'calculate';
     }
