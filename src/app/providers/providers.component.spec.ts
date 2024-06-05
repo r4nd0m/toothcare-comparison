@@ -1,8 +1,9 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvidersComponent } from './providers.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
+import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+import { ProvidersComponent } from './providers.component';
+import { RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 
 describe('ProvidersComponent', () => {
     let component: ProvidersComponent;
@@ -10,11 +11,17 @@ describe('ProvidersComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule],
+            imports: [
+                RouterModule.forRoot([]), 
+                RouterOutlet, 
+                RouterLinkActive,
+                InsuranceProviderComponent
+            ],
             providers: [DataService]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
+
+
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ProvidersComponent);
