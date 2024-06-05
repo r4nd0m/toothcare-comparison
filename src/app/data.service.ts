@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from './model';
 import { Subject } from 'rxjs';
 
@@ -6,11 +6,11 @@ import { Subject } from 'rxjs';
 export class DataService {
     providersChanged = new Subject<InsuranceProvider[]>();
 
-    private missingTeethData: MissingTeethData = {
+    private missingTeethData: WritableSignal<MissingTeethData> = signal<MissingTeethData>({
         teeth_min: 2,
         teeth_max: 15,
         tooth_price: 1500
-    };
+    });
 
     private providers: InsuranceProvider[] = [
         new InsuranceProvider(
@@ -84,11 +84,15 @@ export class DataService {
         this.providersChanged.next(this.getProviders());
     }
 
+    public getMissingTeethDataSignal(): Signal<MissingTeethData> {
+        return this.missingTeethData;
+    }
+
     public getMissingTeethData(): MissingTeethData {
-        return { ...this.missingTeethData };
+        return this.missingTeethData();
     }
 
     public setMissingTeethData(data: MissingTeethData) {
-        this.missingTeethData = data;
+        this.missingTeethData.set(data);
     }
 }

@@ -5,10 +5,11 @@ import { DataService } from '../data.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
 	standalone: true,
-	imports: [InsuranceProviderComponent, ReactiveFormsModule, CommonModule],
+	imports: [InsuranceProviderComponent, ReactiveFormsModule, CommonModule, RouterModule],
 	selector: 'providers',
 	templateUrl: './providers.component.html',
 	styleUrls: ['./providers.component.css'],
@@ -24,6 +25,7 @@ export class ProvidersComponent implements OnDestroy{
 		this.providers = dataService.getProviders();
 
 		const missingTeethData: MissingTeethData = dataService.getMissingTeethData();
+		
 		this.missingTeethDataForm = new FormGroup({
 			'teeth_min': new FormControl(missingTeethData.teeth_min),
 			'teeth_max': new FormControl(missingTeethData.teeth_max),
