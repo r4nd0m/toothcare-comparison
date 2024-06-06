@@ -1,4 +1,4 @@
-import { RouterModule } from '@angular/router';
+import { NoPreloading, RouterModule } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appRoutes } from './app/app.routes';
@@ -16,7 +16,14 @@ if (environment.production) {
 bootstrapApplication(
     AppComponent, {
         providers: [
-            importProvidersFrom(RouterModule.forRoot(appRoutes)),
+            importProvidersFrom(
+                RouterModule.forRoot(
+                    appRoutes, 
+                    {
+                        preloadingStrategy: NoPreloading
+                    }
+                )
+            ),
             CalculationService,
             DataService,
             ɵprovideZonelessChangeDetection()
