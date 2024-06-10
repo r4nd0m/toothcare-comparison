@@ -4,12 +4,12 @@ export function createAnimationForTrigger(triggerName: string) {
     return trigger(triggerName, [
         state('in', style({
             transform: 'scale(0)',
-            height: 'auto'
+            height: '0'
         })),
         transition('void => *', [
             style({
                 transform: 'scale(0)',
-                height: 'auto'
+                height: '0'
             }),
             animate(300)
         ]),
