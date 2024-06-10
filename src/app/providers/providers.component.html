@@ -1,11 +1,13 @@
 <h2>Providers:</h2>
 <div class="form-group">
 	@for (provider of providers(); track provider.name + provider.coverage_part) {
-		<insurance-provider
-			[provider]="provider"
-			(onRemove)="removeProvider($index)"
-			(onUpdate)="updateProvider($index, $event)"
-		></insurance-provider>
+		<div [@providerAnimationState]>
+			<insurance-provider
+				[provider]="provider"
+				(onRemove)="removeProvider($index)"
+				(onUpdate)="updateProvider($index, $event)"
+			></insurance-provider>
+		</div>
 	}
 
 	@if ( providers().length === 0 ) {

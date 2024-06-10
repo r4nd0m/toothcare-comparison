@@ -5,6 +5,7 @@ import { DataService } from '../data.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { RouterModule } from '@angular/router';
+import { PROVIDERS_ANIMATIONS } from './providers.animations';
 
 @Component({
 	standalone: true,
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
 	selector: 'providers',
 	templateUrl: './providers.component.html',
 	styleUrls: ['./providers.component.css'],
+	animations: [PROVIDERS_ANIMATIONS]
 })
 export class ProvidersComponent {
 	providers: Signal<InsuranceProvider[]>;

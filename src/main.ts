@@ -8,6 +8,7 @@ import { DataService } from './app/data.service';
 
 import { enableProdMode, ɵprovideZonelessChangeDetection } from '@angular/core';
 import { environment } from './environments/environment';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 if (environment.production) {
   enableProdMode();
@@ -24,6 +25,7 @@ bootstrapApplication(
                     }
                 )
             ),
+            provideAnimations(),
             CalculationService,
             DataService,
             ɵprovideZonelessChangeDetection()
