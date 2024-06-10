@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Signal, inject } from '@angular/core';
+import { AfterViewInit, Component, Signal, WritableSignal, inject, signal } from '@angular/core';
 import { InsuranceProvider, MissingTeethData } from '../model';
 import { DataService } from '../data.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -15,9 +15,10 @@ import { createAnimationForTrigger } from '../shared/add-remove.animations';
 	styleUrls: ['./providers.component.css'],
 	animations: [createAnimationForTrigger('providerAnimation')]
 })
-export class ProvidersComponent {
+export class ProvidersComponent implements AfterViewInit{
 	providers: Signal<InsuranceProvider[]>;
 	missingTeethDataForm: FormGroup;
+	animationsDisabled: WritableSignal<boolean> = signal(true); 
 
 	private dataService = inject(DataService);
 
@@ -34,6 +35,13 @@ export class ProvidersComponent {
 		
 		this.missingTeethDataForm.valueChanges.subscribe( 
 			() => this.dataService.setMissingTeethData(this.missingTeethDataForm.value)
+		)
+	}
+
+	ngAfterViewInit(): void {
+		setTimeout(() =>
+			this.animationsDisabled.set(false),
+			0
 		)
 	}
 

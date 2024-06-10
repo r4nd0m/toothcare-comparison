@@ -1,7 +1,7 @@
-<h2>Providers:</h2>
+<h2>Providers:</h2>{{animationsDisabled()}}
 <div class="form-group">
 	@for (provider of providers(); track provider.name + provider.coverage_part) {
-		<div [@providerAnimation]>
+		<div [@providerAnimation] [@.disabled]="animationsDisabled()">
 			<insurance-provider
 				[provider]="provider"
 				(onRemove)="removeProvider($index)"
