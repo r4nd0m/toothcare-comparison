@@ -1,4 +1,4 @@
-<h2>Providers:</h2>{{animationsDisabled()}}
+<h2>Providers:</h2>
 <div class="form-group">
 	@for (provider of providers(); track provider.name + provider.coverage_part) {
 		<div [@providerAnimation] [@.disabled]="animationsDisabled()">
