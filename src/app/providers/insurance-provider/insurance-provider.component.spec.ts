@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InsuranceProviderComponent } from './insurance-provider.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InsurancePeriod, InsurancePrice, InsuranceProvider } from '../../model';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('InsuranceProviderComponent', () => {
     let component: InsuranceProviderComponent;
@@ -10,7 +11,7 @@ describe('InsuranceProviderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule]
+            imports: [ReactiveFormsModule, NoopAnimationsModule]
         })
             .compileComponents();
     });

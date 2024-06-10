@@ -33,7 +33,7 @@
 		<label>Prices:</label>
 		
 		@for (price of provider().prices; track $index) {
-			<div [formGroupName]="$index" class="row row-provider-price mt-2">
+			<div [formGroupName]="$index" class="row row-provider-price mt-2" [@priceAnimation]>
 				<div class="mx-0 mt-2">
 					Age
 				</div>

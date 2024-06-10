@@ -4,6 +4,7 @@ import { DataService } from '../data.service';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { ProvidersComponent } from './providers.component';
 import { RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProvidersComponent', () => {
     let component: ProvidersComponent;
@@ -15,7 +16,8 @@ describe('ProvidersComponent', () => {
                 RouterModule.forRoot([]), 
                 RouterOutlet, 
                 RouterLinkActive,
-                InsuranceProviderComponent
+                InsuranceProviderComponent,
+                NoopAnimationsModule
             ],
             providers: [DataService]
         }).compileComponents();

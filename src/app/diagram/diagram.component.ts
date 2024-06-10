@@ -3,7 +3,7 @@ import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '
 import { CalculationService } from '../calculation.service';
 import { DataService } from '../data.service';
 import { CalculateButtonDirective } from '../providers/calculate.button.directive';
-import { ToRgbaPipe } from '../to-rgba.pipe';
+import { ToRgbaPipe } from '../shared/to-rgba.pipe';
 
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 

@@ -1,13 +1,15 @@
 import { Component, OnInit, input, output } from '@angular/core';
 import { InsuranceProvider, InsurancePrice } from '../../model';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { createAnimationForTrigger } from '../../shared/add-remove.animations';
 
 @Component({
 	standalone: true,
 	imports: [ReactiveFormsModule],
 	selector: 'insurance-provider',
 	templateUrl: './insurance-provider.component.html',
-	styleUrls: ['./insurance-provider.component.css']
+	styleUrls: ['./insurance-provider.component.css'],
+	animations: [createAnimationForTrigger('priceAnimation')]
 })
 export class InsuranceProviderComponent implements OnInit {
 	provider = input.required<InsuranceProvider>();

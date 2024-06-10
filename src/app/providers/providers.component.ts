@@ -5,7 +5,7 @@ import { DataService } from '../data.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { RouterModule } from '@angular/router';
-import { PROVIDERS_ANIMATIONS } from './providers.animations';
+import { createAnimationForTrigger } from '../shared/add-remove.animations';
 
 @Component({
 	standalone: true,
@@ -13,7 +13,7 @@ import { PROVIDERS_ANIMATIONS } from './providers.animations';
 	selector: 'providers',
 	templateUrl: './providers.component.html',
 	styleUrls: ['./providers.component.css'],
-	animations: [PROVIDERS_ANIMATIONS]
+	animations: [createAnimationForTrigger('providerAnimation')]
 })
 export class ProvidersComponent {
 	providers: Signal<InsuranceProvider[]>;

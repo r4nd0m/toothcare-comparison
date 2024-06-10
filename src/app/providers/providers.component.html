@@ -1,7 +1,7 @@
 <h2>Providers:</h2>
 <div class="form-group">
 	@for (provider of providers(); track provider.name + provider.coverage_part) {
-		<div [@providerAnimationState]>
+		<div [@providerAnimation]>
 			<insurance-provider
 				[provider]="provider"
 				(onRemove)="removeProvider($index)"

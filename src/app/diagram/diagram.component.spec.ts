@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DiagramComponent } from './diagram.component';
 import { CalculateButtonDirective } from '../providers/calculate.button.directive';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { ToRgbaPipe } from '../to-rgba.pipe';
+import { ToRgbaPipe } from '../shared/to-rgba.pipe';
 import { DataService } from '../data.service';
 import { CalculationService } from '../calculation.service';
 
