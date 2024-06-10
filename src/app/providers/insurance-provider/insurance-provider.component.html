@@ -32,7 +32,7 @@
 	<div class="form-group col-md-12" formArrayName="prices">
 		<label>Prices:</label>
 		
-		@for (price of provider().prices; track $index) {
+		@for (price of provider().prices; track price.period.start + price.period.end + price.price) {
 			<div [formGroupName]="$index" class="row row-provider-price mt-2" [@priceAnimation]>
 				<div class="mx-0 mt-2">
 					Age
