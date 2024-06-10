@@ -4,3 +4,12 @@
     margin-right: 0;
     flex-wrap: nowrap;
 }
+
+input:focus {
+    background-color: #ddffdd !important;
+}
+
+input {
+    background-color: transparent;
+    transition: background-color 1s !important;
+}
