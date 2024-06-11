@@ -17,7 +17,6 @@ export class AuthService {
     constructor() { }
 
     login(userCredentials: UserCredentials): Promise<void> {
-        console.log(`User ${userCredentials.email} logged in.`)
 
         if (userCredentials.email === this.invalidUserCredentials.email && userCredentials.password === this.invalidUserCredentials.password) {
             this.isLoggedIn.set(false);
@@ -31,7 +30,6 @@ export class AuthService {
     }
 
     logout() {
-        console.log(`User logged out.`)
         this.isLoggedIn.set(false);
     }
 }
