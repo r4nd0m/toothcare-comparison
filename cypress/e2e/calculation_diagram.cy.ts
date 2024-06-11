@@ -11,7 +11,7 @@ describe('Test calculation diagram', () => {
 
         // calculation button present
         cy.get('button.button-calculate').contains("recalculate");
-        // diagram is being build automatically on tab opening
+        // diagram is being built automatically on tab opening
         cy.get('canvas.diagram').should('exist');
     })
     
