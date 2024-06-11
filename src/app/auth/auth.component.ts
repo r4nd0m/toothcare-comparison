@@ -17,8 +17,6 @@ export class AuthComponent {
     constructor(private authService: AuthService, private router: Router) {}
 
     onSubmit(form: NgForm) {
-        console.log(form);
-
         this.authService.login(form.value as UserCredentials).then(() => {
             this.errorMessage.set('');
 
