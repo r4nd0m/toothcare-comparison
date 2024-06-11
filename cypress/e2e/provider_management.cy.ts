@@ -1,8 +1,11 @@
 import { cy, it } from 'local-cypress'
+import { authenticate } from './authenticate';
 
 describe('Test provider management', () => {
+  beforeEach(authenticate);
+  
   it('Opens the application and checks if the providers adding/removing is working', () => {
-    cy.visit('http://localhost:4200/');
+    cy.get('#providers-page-link').click();
 
     // there should be 5 default providers on start
     cy.get('insurance-provider').should("have.length", 5);

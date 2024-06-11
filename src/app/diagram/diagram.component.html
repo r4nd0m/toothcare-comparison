@@ -7,7 +7,7 @@
     (click)="recalculate()">
 </button>
 
-@if(lineChartDataSignal().length > 0) {
+@if(lineChartDataSignal().length > 0 && calculatingSignal() === false) {
     <canvas class="diagram" baseChart width="400" height="400"
         [datasets]="lineChartDataSignal()"
         [labels]="lineChartLabelsSignal()"

@@ -12,7 +12,7 @@ export class AuthService {
         password: 'invalidpassword'
     };
 
-    isLoggedIn: WritableSignal<boolean> = signal(true);
+    isLoggedIn: WritableSignal<boolean> = signal(false);
 
     constructor() { }
 

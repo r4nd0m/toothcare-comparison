@@ -1,19 +1,38 @@
 import { cy, it } from 'local-cypress'
+import { authenticate } from './authenticate';
+
 
 describe('Test calculation diagram', () => {
-  it('Opens the application and checks if the calculation is working', () => {
-    cy.visit('http://localhost:4200/diagram');
 
-    // calculation button present
-    cy.get('button.button-calculate').contains("calculate");
-    // diagram not present initially
-    cy.get('canvas.diagram').should('not.exist');
+    beforeEach(authenticate);
 
-    cy.get('button.button-calculate').click();
+    it('Opens the application and checks if the calculation is working', () => {
+        cy.get('#diagram-page-link').click();
 
-    // button label changed
-    cy.get('button.button-calculate').contains("recalculate");
-    // diagram should be present
-    cy.get('canvas.diagram').should('exist');
-  })
+        // calculation button present
+        cy.get('button.button-calculate').contains("recalculate");
+        // diagram is being build automatically on tab opening
+        cy.get('canvas.diagram').should('exist');
+    })
+    
+
+    it('Removes all providers and checks if the diagram is not being displayed', () => {
+        // open providers list
+        cy.get('#providers-page-link').click();
+
+        // remove all providers
+        cy.get('insurance-provider:first button.button-remove-provider').click();
+        cy.get('insurance-provider:first button.button-remove-provider').click();
+        cy.get('insurance-provider:first button.button-remove-provider').click();
+        cy.get('insurance-provider:first button.button-remove-provider').click();
+        cy.get('insurance-provider:first button.button-remove-provider').click();
+
+        // open diagram tab
+        cy.get('#diagram-page-link').click();
+
+        // calculation button present
+        cy.get('button.button-calculate').contains("recalculate");
+        // diagram is being build automatically on tab opening
+        cy.get('canvas.diagram').should('not.exist');
+    })
 })
