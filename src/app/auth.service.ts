@@ -5,13 +5,29 @@ import { UserCredentials } from './model';
     providedIn: 'root'
 })
 export class AuthService {
+    
+    // 'invalid' credentials are used to emulate login service error
+    private invalidUserCredentials: UserCredentials = {
+        email: 'invalid@email',
+        password: 'invalidpassword'
+    };
+
     isLoggedIn: WritableSignal<boolean> = signal(true);
 
     constructor() { }
 
-    login(userCredentials: UserCredentials) {
+    login(userCredentials: UserCredentials): Promise<void> {
         console.log(`User ${userCredentials.email} logged in.`)
-        this.isLoggedIn.set(true);
+
+        if (userCredentials.email === this.invalidUserCredentials.email && userCredentials.password === this.invalidUserCredentials.password) {
+            this.isLoggedIn.set(false);
+
+            return Promise.reject('Error happened, please try again');
+        } else {
+            this.isLoggedIn.set(true);
+
+            return Promise.resolve();
+        }
     }
 
     logout() {

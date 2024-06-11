@@ -1,7 +1,7 @@
 import { cy, it } from 'local-cypress'
 
 describe('Test authentication', () => {
-    it('Opens the application and checks if the provider prices adding/removing is working', () => {
+    it('Opens the application and checks if authentication is working', () => {
         cy.visit('http://localhost:4200/auth');
 
         // login button disabled when there are no data entered
@@ -51,6 +51,15 @@ describe('Test authentication', () => {
 
         // redirect to /auth page after logout
         cy.location('pathname').should('eq', '/auth')
+
+        // try to login with valid but 'non-registered' email and password
+        cy.get('input#email').clear().type('invalid@email');
+        cy.get('input#password').clear().type('invalidpassword');
+        cy.get('#login-button').click();
+
+        // check error message to be displayed
+        cy.get('#login-error-message').should('exist');
+        cy.get('#login-error-message').contains('Error happened, please try again');
 
     })
 })
