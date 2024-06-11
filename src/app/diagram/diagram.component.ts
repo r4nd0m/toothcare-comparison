@@ -23,7 +23,7 @@ export class DiagramComponent implements OnInit {
 	providersSignal: Signal<InsuranceProvider[]>;
 	missingTeethDataSignal: Signal<MissingTeethData>;
 
-	calculatingSignal = signal<boolean>(false);
+	calculatingSignal = signal<boolean>(true);
 
 	lineChartDataSignal = signal<ProviderCalculationResult[]>([]);
 	lineChartLabelsSignal = signal<string[]>([]);

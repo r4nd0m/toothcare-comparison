@@ -1,0 +1,36 @@
+<h2>Authenticate:</h2>
+<h4>(just enter any reasonable login/password and press Login button)</h4>
+
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    @if(errorMessage().length) {
+        <div id="login-error-message" class="alert alert-danger">{{errorMessage()}}</div>
+    }
+
+    <div class="form-group">
+        <label for="email">Email*</label>
+        <input
+            class="form-control"
+            type="email"
+            id="email"
+            ngModel
+            name="email"
+            required
+            email
+        >
+    </div>
+    <div class="form-group">
+        <label for="password">Password*</label>
+        <input
+            class="form-control"
+            type="password"
+            id="password"
+            ngModel
+            name="password"
+            required
+            minlength="5"
+        >
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" id="login-button" type="submit" [disabled]="!authForm.valid">Login</button>
+    </div>
+</form>

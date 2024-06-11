@@ -5,6 +5,16 @@
                 <li role="presentation" class="nav-item">
                     <a 
                         class="nav-link" 
+                        routerLink="/auth"
+                        routerLinkActive="active"
+                    >
+                        Authenticate
+                    </a>
+                </li>
+                <li role="presentation" class="nav-item">
+                    <a 
+                        class="nav-link" 
+                        id="providers-page-link"
                         routerLink="/"
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}"
@@ -15,12 +25,25 @@
                 <li role="presentation" class="nav-item">
                     <a 
                         class="nav-link" 
+                        id="diagram-page-link"
                         routerLink="/diagram"
                         routerLinkActive="active"
                     >
                         Results
                     </a>
                 </li>
+
+                @if (isAuthenticated()) {
+                    <li role="presentation" class="ml-auto">
+                        <a 
+                            class="btn btn-primary py-1" 
+                            id="logout-button"
+                            (click)="onLogoutClick()"
+                        >
+                            Logout
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
