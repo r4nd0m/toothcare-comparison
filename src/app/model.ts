@@ -79,3 +79,8 @@ export type MissingTeethData = {
 	teeth_max: number,
 	tooth_price: number
 }
+
+export type UserCredentials = {
+	email: string,
+	password: string
+}

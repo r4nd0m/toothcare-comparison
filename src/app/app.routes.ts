@@ -9,6 +9,13 @@ export const appRoutes: Routes = [
 			) 
 	},
 	{ 
+		path: 'auth', 
+		loadComponent: () => 
+			import ('./auth/auth.component').then(
+				(mod) => mod.AuthComponent
+			)
+	},
+	{ 
 		path: 'diagram', 
 		loadComponent: () => 
 			import ('./diagram/diagram.component').then(
