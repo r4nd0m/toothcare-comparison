@@ -1,5 +1,5 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
-import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from './model';
+import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from '../model';
 
 @Injectable()
 export class DataService {

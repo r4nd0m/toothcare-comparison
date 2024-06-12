@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ProviderCalculationResultItem, InsuranceProvider, MissingTeethData, ProviderCalculationResult } from './model.js';
-import { ToRgbaPipe } from './shared/to-rgba.pipe';
+import { ProviderCalculationResultItem, InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model.js';
+import { ToRgbaPipe } from '../shared/to-rgba.pipe.js';
 
 @Injectable()
 export class CalculationService {
