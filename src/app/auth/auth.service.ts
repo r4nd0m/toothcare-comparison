@@ -1,5 +1,5 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
-import { UserCredentials } from './model';
+import { UserCredentials } from '../model';
 
 @Injectable({
     providedIn: 'root'

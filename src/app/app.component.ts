@@ -1,6 +1,6 @@
 import { Component, Signal } from '@angular/core';
 import { Router, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
     standalone: true,

@@ -1,7 +1,7 @@
 <h2>Authenticate:</h2>
 <h4>(just enter any reasonable login/password and press Login button)</h4>
 
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+<form #authForm="ngForm" (ngSubmit)="onSubmit()">
     @if(errorMessage().length) {
         <div id="login-error-message" class="alert alert-danger">{{errorMessage()}}</div>
     }
