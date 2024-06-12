@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, Signal, WritableSignal, inject, signal } from '@angular/core';
 import { InsuranceProvider, MissingTeethData } from '../model';
-import { DataService } from '../data.service';
+import { DataService } from '../shared/data.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { RouterModule } from '@angular/router';

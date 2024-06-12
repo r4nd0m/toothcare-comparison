@@ -4,8 +4,8 @@ import { DiagramComponent } from './diagram.component';
 import { CalculateButtonDirective } from '../providers/calculate.button.directive';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ToRgbaPipe } from '../shared/to-rgba.pipe';
-import { DataService } from '../data.service';
-import { CalculationService } from '../calculation.service';
+import { DataService } from '../shared/data.service';
+import { CalculationService } from './calculation.service';
 
 describe('DiagramComponent', () => {
   let component: DiagramComponent;

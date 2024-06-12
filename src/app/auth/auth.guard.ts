@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { AuthService } from "../auth.service";
+import { AuthService } from "./auth.service";
 import { CanActivateFn, Router, UrlTree } from "@angular/router";
 
 export function authGuardFn(redirectToUrl: string): CanActivateFn {

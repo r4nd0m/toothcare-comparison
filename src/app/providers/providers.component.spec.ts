@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataService } from '../data.service';
+import { DataService } from '../shared/data.service';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { ProvidersComponent } from './providers.component';
 import { RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';

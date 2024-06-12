@@ -1,7 +1,7 @@
 import { Component, OnInit, Signal, inject, signal } from '@angular/core';
 import { InsuranceProvider, MissingTeethData, ProviderCalculationResult } from '../model';
-import { CalculationService } from '../calculation.service';
-import { DataService } from '../data.service';
+import { CalculationService } from './calculation.service';
+import { DataService } from '../shared/data.service';
 import { CalculateButtonDirective } from '../providers/calculate.button.directive';
 import { ToRgbaPipe } from '../shared/to-rgba.pipe';
 

@@ -1,6 +1,6 @@
-import { Component, WritableSignal, signal } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, WritableSignal, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from './auth.service';
 import { UserCredentials } from '../model';
 import { Router } from '@angular/router';
 
@@ -13,14 +13,15 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent {
     errorMessage: WritableSignal<string> = signal('');
+    @ViewChild('authForm') public authForm: NgForm;
 
     constructor(private authService: AuthService, private router: Router) {}
 
-    onSubmit(form: NgForm) {
-        this.authService.login(form.value as UserCredentials).then(() => {
+    onSubmit() {
+        this.authService.login(this.authForm.value as UserCredentials).then(() => {
             this.errorMessage.set('');
 
-            form.reset();
+            this.authForm.reset();
 
             this.router.navigate(['/']);
         }).catch((errorMessage) => {
