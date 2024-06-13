@@ -35,10 +35,9 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Create 404 page
         run: cp ./dist/toothcare-comparison/browser/index.html ./dist/toothcare-comparison/browser/404.html 
-      - name: Upload artifact
+      - name: Upload the whole application
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: './dist/toothcare-comparison/browser'
       - name: Deploy to GitHub Pages
         id: deployment
