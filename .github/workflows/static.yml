@@ -34,7 +34,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Create 404 page
-        run: echo "404 page" > ./dist/toothcare-comparison/browser/404.html 
+        run: cp ./dist/toothcare-comparison/browser/index.html > ./dist/toothcare-comparison/browser/404.html 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
