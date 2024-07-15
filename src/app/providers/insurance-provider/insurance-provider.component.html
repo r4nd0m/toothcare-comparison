@@ -1,8 +1,8 @@
 <form [formGroup]="insuranceProviderForm" class="py-2 mb-4 shadow rounded">
-	<div class="form-group" >
-		<label class="row col" for="{{this.element_id}}_provider_name">Name:</label>
-		<div class="row">
-			<div class="col-md-10">
+	<div class="m-3" >
+		<label class="row" for="{{this.element_id}}_provider_name">Name:</label>
+		<div class="container-fluid px-0 hstack gap-0">
+			<div class="col-10 pe-2">
 				<input 
 					class="form-control" 
 					id="{{this.element_id}}_provider_name" 
@@ -10,15 +10,13 @@
 					formControlName="name"
 				>
 			</div>
-			<div class="col">
-				<button class="button-remove-provider btn btn-outline-danger" (click)="removeProvider()">remove</button>
-			</div>
+			<button class="col-2 button-remove-provider btn btn-outline-danger" (click)="removeProvider()">remove</button>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="row col" for="{{this.element_id}}_provider_coverage_part">Coverage part (%):</label>
-		<div class="row">
-			<div class="col-md-10">
+	<div class="m-3">
+		<label class="row" for="{{this.element_id}}_provider_coverage_part">Coverage part (%):</label>
+		<div class="container-fluid px-0">
+			<div >
 				<input 
 					class="form-control" 
 					id="{{this.element_id}}_provider_coverage_part" 
@@ -29,15 +27,15 @@
 		</div>
 	</div>
 
-	<div class="form-group col-md-12" formArrayName="prices">
-		<label>Prices:</label>
+	<div class="m-3" formArrayName="prices">
+		<label class="row">Prices:</label>
 		
 		@for (price of provider().prices; track price.period.start + price.period.end + price.price) {
-			<div [formGroupName]="$index" class="row row-provider-price mt-2" [@priceAnimation]>
-				<div class="mx-0 mt-2">
+			<div [formGroupName]="$index" class="container-fluid px-0 py-1 hstack gap-2 row-provider-price" [@priceAnimation]>
+				<div class="mx-0">
 					Age
 				</div>
-				<div class="col col-md-3 mx-0" formGroupName="period">
+				<div class="mx-0" formGroupName="period">
 					<input 
 						class="form-control" 
 						name="period_start" 
@@ -48,10 +46,10 @@
 						formControlName="start"
 					>
 				</div>
-				<div class="mx-0 px-0 mt-2">
+				<div class="mx-0 px-0">
 					- 
 				</div>
-				<div class="col col-md-3 mx-0" formGroupName="period">
+				<div class="mx-0" formGroupName="period">
 					<input 
 						class="form-control" 
 						name="period_end"
@@ -62,10 +60,10 @@
 						formControlName="end"
 					>
 				</div>
-				<div class="mx-0 px-0 mt-2">
+				<div class="mx-0 px-0">
 					:
 				</div>
-				<div class="col col-md-3 mx-0">
+				<div class="mx-0">
 					<input 
 						class="form-control" 
 						name="period_price" 
@@ -87,10 +85,10 @@
 			<div class="row">no prices added</div>
 		}
 		
-		<div class="row">
+
 			<div class="btn-toolbar mt-2" role="toolbar">
 				<button class="button-add-price btn btn-outline-primary float-right" (click)="addPrice()">add price</button>
 			</div>
-		</div>
+
 	</div>
 </form>

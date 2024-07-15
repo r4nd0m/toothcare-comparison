@@ -1,3 +1,11 @@
 input {
 	min-width: 100px;
 }
+
+button {
+	min-width: 80px;
+}
+
+form {
+	min-width: 500px;
+}

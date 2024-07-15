@@ -1,5 +1,5 @@
 <h2>Providers:</h2>
-<div class="form-group">
+<div class="container p-0">
 	@for (provider of providers(); track provider.name + provider.coverage_part) {
 		<div [@providerAnimation] [@.disabled]="animationsDisabled()">
 			<insurance-provider
@@ -14,56 +14,45 @@
 		<span class="message-no-providers">No providers selected</span>
 	}
 
-	<button class="button-add-provider row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
+	<button class="button-add-provider btn btn-outline-primary" (click)="addProvider()">add provider</button>
 </div>
 
-<h2>Additional parameters:</h2>
+<h2 class="mt-4">Additional parameters:</h2>
 
 <form [formGroup]="missingTeethDataForm">
-	<div class="form-group">
-		<label for="missing_tooth_price">Missing tooth recovery price:</label>
-		<div class="row">
-			<div class="col-lg-2">
-				<input 
-					class="form-control" 
-					id="missing_tooth_price" 
-					type="number" 
-					step="100"
-					formControlName="tooth_price"
-				>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="missing_teeth_min">Calculate for missing teeth between:</label>
-		<div class="row">
-			<div class="col-lg-2">
-				<input 
-					class="form-control" 
-					id="missing_teeth_min" 
-					type="number"
-					min="0" 
-					max="32"
-					formControlName="teeth_min"
-				>
-			</div>
-			<div class="col-lg-1">and</div>
-			<div class="col-lg-2">
-				<input 
-					class="form-control" 
-					id="missing_teeth_max" 
-					type="number"
-					min="0" 
-					max="32"
-					formControlName="teeth_max"
-				>
-			</div>
-		</div>
-	</div>
-</form>
+	<label class="form-label" for="missing_tooth_price">Missing tooth recovery price:</label>
+	<input 
+		class="form-control" 
+		id="missing_tooth_price" 
+		type="number" 
+		step="100"
+		formControlName="tooth_price"
+	>
 
-<div class="row">
-	<div class="col">
-		<button class="btn btn-primary" routerLink="/diagram">Go to calculation</button>
+	<label for="missing_teeth_min" class="mt-2">Calculate for missing teeth between:</label>
+	<div class="hstack">
+		<div class="pe-5 col-6">
+			<input 
+				class="form-control" 
+				id="missing_teeth_min" 
+				type="number"
+				min="0" 
+				max="32"
+				formControlName="teeth_min"
+			>
+		</div>
+		<div class="py-1 text-and">and</div>
+		<div class="ps-5 col-6">
+			<input 
+				class="form-control" 
+				id="missing_teeth_max" 
+				type="number"
+				min="0" 
+				max="32"
+				formControlName="teeth_max"
+			>
+		</div>
 	</div>
-</div>
+
+	<button class="container-fluid btn btn-primary col-md-auto col-sm-12 mt-3" routerLink="/diagram">Go to calculation</button>
+</form>
