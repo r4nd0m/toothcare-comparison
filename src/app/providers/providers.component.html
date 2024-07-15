@@ -1,5 +1,5 @@
 <h2>Providers:</h2>
-<div class="form-group">
+<div class="container p-0">
 	@for (provider of providers(); track provider.name + provider.coverage_part) {
 		<div [@providerAnimation] [@.disabled]="animationsDisabled()">
 			<insurance-provider
@@ -14,30 +14,26 @@
 		<span class="message-no-providers">No providers selected</span>
 	}
 
-	<button class="button-add-provider row col m-2 btn btn-outline-primary" (click)="addProvider()">add provider</button>
+	<button class="button-add-provider btn btn-outline-primary" (click)="addProvider()">add provider</button>
 </div>
 
-<h2>Additional parameters:</h2>
+<h2 class="mt-4">Additional parameters:</h2>
 
 <form [formGroup]="missingTeethDataForm">
 	<div class="form-group">
 		<label for="missing_tooth_price">Missing tooth recovery price:</label>
-		<div class="row">
-			<div class="col-lg-2">
-				<input 
-					class="form-control" 
-					id="missing_tooth_price" 
-					type="number" 
-					step="100"
-					formControlName="tooth_price"
-				>
-			</div>
-		</div>
+		<input 
+			class="form-control" 
+			id="missing_tooth_price" 
+			type="number" 
+			step="100"
+			formControlName="tooth_price"
+		>
 	</div>
 	<div class="form-group">
 		<label for="missing_teeth_min">Calculate for missing teeth between:</label>
-		<div class="row">
-			<div class="col-lg-2">
+		<div class="row container-fluid col-lg-4 col-md-5 col-sm-12 p-0">
+			<div class="col-lg-6 col-md-6 px-0">
 				<input 
 					class="form-control" 
 					id="missing_teeth_min" 
@@ -47,8 +43,8 @@
 					formControlName="teeth_min"
 				>
 			</div>
-			<div class="col-lg-1">and</div>
-			<div class="col-lg-2">
+			<div class="py-1 text-and">and</div>
+			<div class="col-lg-6 col-md-6 px-0">
 				<input 
 					class="form-control" 
 					id="missing_teeth_max" 
@@ -60,10 +56,9 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group">
+		<button class="btn btn-primary col-md-auto col-sm-12" routerLink="/diagram">Go to calculation</button>
+	</div>
 </form>
 
-<div class="row">
-	<div class="col">
-		<button class="btn btn-primary" routerLink="/diagram">Go to calculation</button>
-	</div>
-</div>
+
