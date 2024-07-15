@@ -1,55 +1,51 @@
-<div class="container shadow p-0">
-    <div class="row mx-0 px-0">
-        <div class="col px-0">
-            <ul class="nav nav-tabs">
-                <li role="presentation" class="nav-item">
-                    <a 
-                        class="nav-link" 
-                        routerLink="/auth"
-                        routerLinkActive="active"
-                    >
-                        Authenticate
-                    </a>
-                </li>
-                <li role="presentation" class="nav-item">
-                    <a 
-                        class="nav-link" 
-                        id="providers-page-link"
-                        routerLink="/"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact:true}"
-                    >
-                        Input data
-                    </a>
-                </li>
-                <li role="presentation" class="nav-item">
-                    <a 
-                        class="nav-link" 
-                        id="diagram-page-link"
-                        routerLink="/diagram"
-                        routerLinkActive="active"
-                    >
-                        Results
-                    </a>
-                </li>
+<div class="container-md shadow px-0">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="nav-item">
+            <a 
+                class="nav-link" 
+                routerLink="/auth"
+                routerLinkActive="active"
+            >
+                Authenticate
+            </a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a 
+                class="nav-link" 
+                id="providers-page-link"
+                routerLink="/"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}"
+            >
+                Input data
+            </a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a 
+                class="nav-link" 
+                id="diagram-page-link"
+                routerLink="/diagram"
+                routerLinkActive="active"
+            >
+                Results
+            </a>
+        </li>
 
-                @if (isAuthenticated()) {
-                    <li role="presentation" class="ml-auto">
-                        <a 
-                            class="btn btn-primary py-1" 
-                            id="logout-button"
-                            (click)="onLogoutClick()"
-                        >
-                            Logout
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
+        @if (isAuthenticated()) {
+            <li role="presentation" class="ml-auto">
+                <a 
+                    class="btn btn-primary py-1" 
+                    id="logout-button"
+                    (click)="onLogoutClick()"
+                >
+                    Logout
+                </a>
+            </li>
+        }
+    </ul>
+
+    <div class="container-sm py-2">
+        <router-outlet></router-outlet>
     </div>
-    <div class="row px-0 mx-0" >
-        <div class="col">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+
 </div>
