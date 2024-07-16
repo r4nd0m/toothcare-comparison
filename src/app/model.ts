@@ -85,4 +85,7 @@ export type UserCredentials = {
 	password: string
 }
 
-export type Theme = 'light' | 'dark';
+export enum Theme { 
+	light = 'light', 
+	dark = 'dark' 
+};

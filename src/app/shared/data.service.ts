@@ -3,7 +3,7 @@ import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData, T
 
 @Injectable()
 export class DataService {
-    private selectedTheme: WritableSignal<Theme> = signal<Theme>(localStorage.getItem('selectedTheme') ? JSON.parse(localStorage.getItem('selectedTheme')) : 'light');
+    private selectedTheme: WritableSignal<Theme> = signal<Theme>(localStorage.getItem('selectedTheme') ? JSON.parse(localStorage.getItem('selectedTheme')) : Theme.light);
     
     private loadedProviders: InsuranceProvider[] = localStorage.getItem('insuranceProviders') ? JSON.parse(localStorage.getItem('insuranceProviders')) : [];
 
@@ -131,10 +131,10 @@ export class DataService {
     
 
     public toggleSelectedTheme() {
-        if (this.selectedTheme() === 'light') {
-            this.selectedTheme.set('dark');
+        if (this.selectedTheme() === Theme.light) {
+            this.selectedTheme.set(Theme.dark);
         } else {
-            this.selectedTheme.set('light');
+            this.selectedTheme.set(Theme.light);
         }
 
         this.saveSelectedTheme();
