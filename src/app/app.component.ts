@@ -2,6 +2,7 @@ import { Component, Signal } from '@angular/core';
 import { Router, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { DataService } from './shared/data.service';
+import { Theme } from './model';
 
 @Component({
     standalone: true,
@@ -16,7 +17,7 @@ import { DataService } from './shared/data.service';
 })
 export class AppComponent {
     isAuthenticated: Signal<boolean>;
-    selectedTheme: Signal<string>;
+    selectedTheme: Signal<Theme>;
 
     constructor(private authService: AuthService, private dataService: DataService, private router: Router) {
         this.isAuthenticated = authService.isLoggedIn;
@@ -31,16 +32,11 @@ export class AppComponent {
     }
 
     onToggleThemeClick() {
-        if (this.selectedTheme() === '') {
-            this.dataService.setSelectedTheme('dark');
-        } else {
-            this.dataService.setSelectedTheme('');
-        }
-
+        this.dataService.toggleSelectedTheme();
         this.applyTheme(this.selectedTheme());
     }
 
-    private applyTheme(theme: string) {
+    private applyTheme(theme: Theme) {
         document.querySelector('html').dataset['bsTheme'] = theme;
     }
 }

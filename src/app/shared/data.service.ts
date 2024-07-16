@@ -1,9 +1,9 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
-import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } from '../model';
+import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData, Theme } from '../model';
 
 @Injectable()
 export class DataService {
-    private selectedTheme: WritableSignal<string> = signal<string>(localStorage.getItem('selectedTheme') ? JSON.parse(localStorage.getItem('selectedTheme')) : '');
+    private selectedTheme: WritableSignal<Theme> = signal<Theme>(localStorage.getItem('selectedTheme') ? JSON.parse(localStorage.getItem('selectedTheme')) : 'light');
     
     private loadedProviders: InsuranceProvider[] = localStorage.getItem('insuranceProviders') ? JSON.parse(localStorage.getItem('insuranceProviders')) : [];
 
@@ -112,7 +112,7 @@ export class DataService {
         return this.missingTeethData.asReadonly();
     }
 
-    public getSelectedThemeSignal(): Signal<string> {
+    public getSelectedThemeSignal(): Signal<Theme> {
         return this.selectedTheme.asReadonly();
     }
 
@@ -120,7 +120,7 @@ export class DataService {
         return this.missingTeethData();
     }
 
-    public getSelectedTheme(): string {
+    public getSelectedTheme(): Theme {
         return this.selectedTheme();
     }
 
@@ -130,8 +130,13 @@ export class DataService {
     }
     
 
-    public setSelectedTheme(data: string) {
-        this.selectedTheme.set(data);
+    public toggleSelectedTheme() {
+        if (this.selectedTheme() === 'light') {
+            this.selectedTheme.set('dark');
+        } else {
+            this.selectedTheme.set('light');
+        }
+
         this.saveSelectedTheme();
     }
 
