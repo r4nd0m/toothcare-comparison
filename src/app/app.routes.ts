@@ -10,7 +10,7 @@ export const appRoutes: Routes = [
 			import ('./providers/providers.component').then(
 				(mod) => mod.ProvidersComponent
 			),
-		canActivate: [authGuardFn(authUrl)]
+		// canActivate: [authGuardFn(authUrl)]
 	},
 	{ 
 		path: 'auth', 
@@ -25,7 +25,7 @@ export const appRoutes: Routes = [
 			import ('./diagram/diagram.component').then(
 				(mod) => mod.DiagramComponent
 			),
-		canActivate: [authGuardFn(authUrl)]
+		// canActivate: [authGuardFn(authUrl)]
 	},
 	{ path: '**', redirectTo: '' }
 ];

@@ -31,8 +31,22 @@
             </a>
         </li>
 
+        <li role="presentation" class="nav-item m-1 ms-5">
+            <a 
+                class="btn py-1" 
+                id="theme-button"
+                (click)="onToggleThemeClick()"
+            >
+                @if (selectedTheme() === '') {
+                    🌙
+                } @else {
+                    🔆
+                }
+            </a>
+        </li>
+
         @if (isAuthenticated()) {
-            <li role="presentation" class="ms-auto">
+            <li role="presentation" class="ms-auto m-1">
                 <a 
                     class="btn btn-primary py-1" 
                     id="logout-button"
