@@ -5816,7 +5816,7 @@
       "format": "esm"
     },
     "src/app/shared/data.service.ts": {
-      "bytes": 3964,
+      "bytes": 4082,
       "imports": [
         {
           "path": "node_modules/@angular/core/fesm2022/core.mjs",
@@ -5837,7 +5837,7 @@
       "format": "esm"
     },
     "src/app/app.component.ts": {
-      "bytes": 4737,
+      "bytes": 4626,
       "imports": [
         {
           "path": "node_modules/@angular/core/fesm2022/core.mjs",
@@ -21644,12 +21644,12 @@
       "bytes": 97,
       "imports": []
     },
-    "src/app/providers/providers.component.css": {
-      "bytes": 113,
-      "imports": []
-    },
     "src/app/auth/auth.component.css": {
       "bytes": 61,
+      "imports": []
+    },
+    "src/app/providers/providers.component.css": {
+      "bytes": 113,
       "imports": []
     },
     "node_modules/bootstrap/dist/css/bootstrap.min.css": {
@@ -21793,7 +21793,7 @@
     }
   },
   "outputs": {
-    "main-BTDLWUGW.js": {
+    "main-J7B6BLQA.js": {
       "imports": [
         {
           "path": "chunk-WXI33M2S.js",
@@ -21812,7 +21812,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunk-WHSBMCJH.js",
+          "path": "chunk-MMBIAMRH.js",
           "kind": "import-statement"
         },
         {
@@ -21820,7 +21820,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunk-3ISTMG2G.js",
+          "path": "chunk-4DTXTBG6.js",
           "kind": "dynamic-import"
         },
         {
@@ -21828,7 +21828,7 @@
           "kind": "dynamic-import"
         },
         {
-          "path": "chunk-RJPVUG6K.js",
+          "path": "chunk-WK2V5K66.js",
           "kind": "dynamic-import"
         }
       ],
@@ -21836,7 +21836,7 @@
       "entryPoint": "src/main.ts",
       "inputs": {
         "src/app/app.component.ts": {
-          "bytesInOutput": 2085
+          "bytesInOutput": 2023
         },
         "src/app/auth/auth.guard.ts": {
           "bytesInOutput": 93
@@ -21857,9 +21857,9 @@
           "bytesInOutput": 102
         }
       },
-      "bytes": 62495
+      "bytes": 62433
     },
-    "chunk-3ISTMG2G.js": {
+    "chunk-4DTXTBG6.js": {
       "imports": [
         {
           "path": "chunk-WXI33M2S.js",
@@ -21874,7 +21874,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunk-WHSBMCJH.js",
+          "path": "chunk-MMBIAMRH.js",
           "kind": "import-statement"
         },
         {
@@ -22042,14 +22042,14 @@
       },
       "bytes": 95315
     },
-    "chunk-RJPVUG6K.js": {
+    "chunk-WK2V5K66.js": {
       "imports": [
         {
           "path": "chunk-LYWKBWJY.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-WHSBMCJH.js",
+          "path": "chunk-MMBIAMRH.js",
           "kind": "import-statement"
         },
         {
@@ -22394,7 +22394,7 @@
       },
       "bytes": 1381
     },
-    "chunk-WHSBMCJH.js": {
+    "chunk-MMBIAMRH.js": {
       "imports": [
         {
           "path": "chunk-DYHRJMNH.js",
@@ -22409,10 +22409,10 @@
           "bytesInOutput": 430
         },
         "src/app/shared/data.service.ts": {
-          "bytesInOutput": 2304
+          "bytesInOutput": 2379
         }
       },
-      "bytes": 2798
+      "bytes": 2873
     },
     "chunk-DYHRJMNH.js": {
       "imports": [],
@@ -22817,16 +22817,6 @@
       "bytes": 66,
       "ng-component": true
     },
-    "providers.component-OSK2SNOQ.css": {
-      "imports": [],
-      "inputs": {
-        "src/app/providers/providers.component.css": {
-          "bytesInOutput": 81
-        }
-      },
-      "bytes": 82,
-      "ng-component": true
-    },
     "auth.component-UEWGNUTY.css": {
       "imports": [],
       "inputs": {
@@ -22835,6 +22825,16 @@
         }
       },
       "bytes": 51,
+      "ng-component": true
+    },
+    "providers.component-OSK2SNOQ.css": {
+      "imports": [],
+      "inputs": {
+        "src/app/providers/providers.component.css": {
+          "bytesInOutput": 81
+        }
+      },
+      "bytes": 82,
       "ng-component": true
     },
     "styles-ESS5UNUY.css": {
