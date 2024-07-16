@@ -3,6 +3,8 @@ import { InsurancePeriod, InsurancePrice, InsuranceProvider, MissingTeethData } 
 
 @Injectable()
 export class DataService {
+    private selectedTheme: WritableSignal<string> = signal<string>(localStorage.getItem('selectedTheme') ? JSON.parse(localStorage.getItem('selectedTheme')) : '');
+    
     private loadedProviders: InsuranceProvider[] = localStorage.getItem('insuranceProviders') ? JSON.parse(localStorage.getItem('insuranceProviders')) : [];
 
     private dummyProviders = [
@@ -110,13 +112,27 @@ export class DataService {
         return this.missingTeethData.asReadonly();
     }
 
+    public getSelectedThemeSignal(): Signal<string> {
+        return this.selectedTheme.asReadonly();
+    }
+
     public getMissingTeethData(): MissingTeethData {
         return this.missingTeethData();
+    }
+
+    public getSelectedTheme(): string {
+        return this.selectedTheme();
     }
 
     public setMissingTeethData(data: MissingTeethData) {
         this.missingTeethData.set(data);
         this.saveMissingTeethData();
+    }
+    
+
+    public setSelectedTheme(data: string) {
+        this.selectedTheme.set(data);
+        this.saveSelectedTheme();
     }
 
     private saveProviders() {
@@ -125,5 +141,9 @@ export class DataService {
 
     private saveMissingTeethData() {
         localStorage.setItem('missingTeethData', JSON.stringify(this.missingTeethData()));
+    }
+
+    private saveSelectedTheme() {
+        localStorage.setItem('selectedTheme', JSON.stringify(this.selectedTheme()));
     }
 }
