@@ -1,14 +1,16 @@
 <div class="container-md shadow px-0">
     <ul class="nav nav-tabs">
-        <li role="presentation" class="nav-item">
-            <a 
-                class="nav-link" 
-                routerLink="/auth"
-                routerLinkActive="active"
-            >
-                Authenticate
-            </a>
-        </li>
+        @if (!isAuthenticated()) {
+            <li role="presentation" class="nav-item">
+                <a 
+                    class="nav-link" 
+                    routerLink="/auth"
+                    routerLinkActive="active"
+                >
+                    Authenticate
+                </a>
+            </li>
+        }
         <li role="presentation" class="nav-item">
             <a 
                 class="nav-link" 
