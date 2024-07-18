@@ -34,7 +34,13 @@ export class ProvidersComponent implements AfterViewInit{
 		});
 		
 		this.missingTeethDataForm.valueChanges.subscribe( 
-			() => this.dataService.setMissingTeethData(this.missingTeethDataForm.value)
+			() => {
+				if (this.missingTeethDataForm.value.teeth_max < this.missingTeethDataForm.value.teeth_min) {
+					this.missingTeethDataForm.value.teeth_max = this.missingTeethDataForm.value.teeth_min;
+				}
+				
+				this.dataService.setMissingTeethData(this.missingTeethDataForm.value)
+			}
 		)
 	}
 

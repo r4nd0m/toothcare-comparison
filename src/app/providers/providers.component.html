@@ -29,26 +29,28 @@
 		formControlName="tooth_price"
 	>
 
-	<label for="missing_teeth_min" class="mt-2">Calculate for missing teeth between:</label>
+	<label for="missing_teeth_min" class="mt-2">Calculate for missing teeth between: {{missingTeethDataForm.value.teeth_min}} and {{missingTeethDataForm.value.teeth_max}}</label>
 	<div class="hstack">
 		<div class="pe-5 col-6">
 			<input 
-				class="form-control" 
+				class="form-range" 
 				id="missing_teeth_min" 
-				type="number"
+				type="range"
 				min="0" 
 				max="32"
+				step="1"
 				formControlName="teeth_min"
 			>
 		</div>
 		<div class="py-1 text-and">and</div>
 		<div class="ps-5 col-6">
 			<input 
-				class="form-control" 
+				class="form-range" 
 				id="missing_teeth_max" 
-				type="number"
-				min="0" 
+				type="range"
+				min="{{missingTeethDataForm.value.teeth_min}}" 
 				max="32"
+				step="1"
 				formControlName="teeth_max"
 			>
 		</div>
