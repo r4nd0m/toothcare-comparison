@@ -1,15 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { DataService } from './shared/data.service';
 
 describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                RouterModule.forRoot([]), 
-                RouterOutlet, 
+                RouterModule.forRoot([]),
+                RouterOutlet,
                 RouterLinkActive
-            ]
+            ],
+            providers: [DataService]
         }).compileComponents();
     });
 

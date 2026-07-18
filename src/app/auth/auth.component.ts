@@ -18,7 +18,7 @@ export class AuthComponent {
     constructor(private authService: AuthService, private router: Router) {}
 
     onSubmit() {
-        this.authService.login(this.authForm.value as UserCredentials).then(() => {
+        return this.authService.login(this.authForm.value as UserCredentials).then(() => {
             this.errorMessage.set('');
 
             this.authForm.reset();
